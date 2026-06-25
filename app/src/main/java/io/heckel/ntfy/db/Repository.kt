@@ -351,7 +351,7 @@ class Repository(private val sharedPrefs: SharedPreferences, database: Database)
     }
 
     fun getDynamicColorsEnabled(): Boolean {
-        return sharedPrefs.getBoolean(SHARED_PREFS_DYNAMIC_COLORS, false)
+        return sharedPrefs.getBoolean(SHARED_PREFS_DYNAMIC_COLORS, true)
     }
 
     fun setConnectionProtocol(connectionProtocol: String) {
