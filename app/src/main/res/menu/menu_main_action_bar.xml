@@ -2,6 +2,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/main_menu_dark_mode_toggle"
+        android:icon="@drawable/ic_dark_mode_white_24dp"
+        android:title="切换深色模式"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/main_menu_connection_error"
         android:icon="@drawable/ic_warning_white_24dp"
         android:title="@string/main_menu_connection_error"

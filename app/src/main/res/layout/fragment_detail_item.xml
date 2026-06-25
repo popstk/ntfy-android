@@ -1,210 +1,273 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-                                   xmlns:tools="http://schemas.android.com/tools" style="@style/CardView"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/detail_item_card"
-    android:background="?android:attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="0dp"
-    android:layout_marginStart="6dp"
-    android:layout_marginEnd="6dp"
-    android:layout_marginBottom="1dp"
-    android:padding="3dp"
-    app:cardCornerRadius="3dp"
-    app:cardElevation="2dp"
-    app:cardMaxElevation="2dp"
-    app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true">
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="3dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="?attr/colorOutlineVariant">
+
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/detail_item_layout"
+        android:id="@+id/detail_item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:focusable="true"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="10dp">
+
+        <!-- 优先级竖条（颜色由代码设置） -->
+        <View
+            android:id="@+id/detail_item_priority_bar"
+            android:layout_width="3dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!-- 时间 -->
+        <TextView
+            android:id="@+id/detail_item_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="10:43"/>
+
+        <!-- 优先级图标（保留向后兼容） -->
+        <ImageView
+            android:id="@+id/detail_item_priority_image"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="5dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/detail_item_date_text"
+            app:layout_constraintStart_toEndOf="@id/detail_item_date_text"
+            app:layout_constraintTop_toTopOf="@id/detail_item_date_text"
+            app:srcCompat="@drawable/ic_priority_5_24dp"/>
+
+        <!-- 未读小圆点 -->
+        <TextView
+            android:id="@+id/detail_item_new_dot"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/ic_circle"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/detail_item_date_text"
+            app:layout_constraintStart_toEndOf="@id/detail_item_priority_image"
+            app:layout_constraintTop_toTopOf="@id/detail_item_date_text"/>
+
+        <!-- 三点菜单按钮 -->
+        <ImageButton
+            android:id="@+id/detail_item_menu_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_more_horiz_gray_24dp"/>
+
+        <!-- 自定义图标（右侧） -->
+        <ImageView
+            android:id="@+id/detail_item_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:maxWidth="36dp"
+            android:maxHeight="36dp"
+            android:padding="0dp"
+            android:scaleType="fitStart"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/detail_item_message_text"
+            app:layout_constraintEnd_toStartOf="@id/detail_item_menu_button"
+            app:layout_constraintTop_toTopOf="@id/detail_item_date_text"
+            app:srcCompat="@drawable/ic_notification"/>
+
+        <!-- 标题（可选） -->
+        <TextView
+            android:id="@+id/detail_item_title_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="6dp"
+            android:autoLink="web"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/detail_item_icon"
+            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintTop_toBottomOf="@id/detail_item_date_text"
+            tools:text="标题"/>
+
+        <!-- 消息正文 -->
+        <TextView
+            android:id="@+id/detail_item_message_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="6dp"
+            android:autoLink="web"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintBottom_toTopOf="@id/detail_item_attachment_image"
+            app:layout_constraintEnd_toStartOf="@id/detail_item_icon"
+            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintTop_toBottomOf="@id/detail_item_title_text"
+            tools:text="消息内容"/>
+
+        <!-- 附件图片预览 -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/detail_item_attachment_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="3dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="160dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/detail_item_tags_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintTop_toBottomOf="@id/detail_item_message_text"
+            app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+            app:srcCompat="@drawable/ic_cancel_gray_24dp"/>
+
+        <!-- 标签文字 -->
+        <TextView
+            android:id="@+id/detail_item_tags_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="6dp"
+            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            app:layout_constraintBottom_toTopOf="@id/detail_item_attachment_file_box"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintTop_toBottomOf="@id/detail_item_attachment_image"
+            tools:text="#ssh, #zfs"/>
+
+        <!-- 文件附件 box -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detail_item_attachment_file_box"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="6dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="4dp"
+            android:paddingStart="0dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintTop_toBottomOf="@id/detail_item_tags_text">
+
+            <ImageView
+                android:id="@+id/detail_item_attachment_file_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/detail_item_attachment_file_info"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_cancel_gray_24dp"/>
+
+            <TextView
+                android:id="@+id/detail_item_attachment_file_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+                android:textColor="?attr/colorOnSurface"
+                app:layout_constraintBottom_toBottomOf="@+id/detail_item_attachment_file_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/detail_item_attachment_file_icon"
+                app:layout_constraintTop_toTopOf="@+id/detail_item_attachment_file_icon"
+                tools:text="attachment.jpg&#10;58 MB"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 操作按钮区域 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detail_item_actions_wrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="4dp"
+            android:padding="0dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintTop_toBottomOf="@id/detail_item_attachment_file_box">
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/detail_item_actions_flow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:padding="0dp"
+                app:flow_firstHorizontalBias="0"
+                app:flow_firstHorizontalStyle="packed"
+                app:flow_firstVerticalBias="0"
+                app:flow_firstVerticalStyle="packed"
+                app:flow_horizontalAlign="start"
+                app:flow_horizontalBias="0"
+                app:flow_horizontalGap="0dp"
+                app:flow_horizontalStyle="packed"
+                app:flow_maxElementsWrap="3"
+                app:flow_verticalAlign="top"
+                app:flow_verticalBias="0"
+                app:flow_verticalGap="0dp"
+                app:flow_verticalStyle="packed"
+                app:flow_wrapMode="chain2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 底部内边距 -->
+        <TextView
+            android:id="@+id/detail_item_padding_bottom"
             android:layout_width="match_parent"
+            android:layout_height="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_item_actions_wrapper"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="?android:attr/selectableItemBackground"
-            android:focusable="true"
-            android:paddingBottom="6dp" android:paddingTop="6dp" android:paddingEnd="6dp">
-        <TextView
-                android:text="Sun, October 31, 2021, 10:43:12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/detail_item_date_text"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="5dp" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="12dp"/>
-        <TextView
-                android:layout_width="10dp"
-                android:layout_height="10dp" android:id="@+id/detail_item_new_dot"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_circle"
-                android:gravity="center"
-                app:layout_constraintTop_toTopOf="@+id/detail_item_date_text"
-                app:layout_constraintBottom_toBottomOf="@+id/detail_item_date_text"
-                android:layout_marginTop="1dp"
-                app:layout_constraintStart_toEndOf="@id/detail_item_priority_image"
-                android:layout_marginStart="5dp"/>
-        <ImageButton
-                android:layout_width="28dp"
-                android:layout_height="26dp" app:srcCompat="@drawable/ic_more_horiz_gray_24dp"
-                android:id="@+id/detail_item_menu_button"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="?android:attr/selectableItemBackground" android:paddingTop="-5dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="3dp"/>
-        <TextView
-                android:text="This is a very very very long message. It could be as long as 1024 charaters, which is a lot more than you'd think. No, really so far this message is barely 180 characters long. I can't believe how long 1024 bytes are. This is outrageous. Oh you know what, I think I won't type the whole thing. This seems a little too long for a sample text. Well, anyway, it was nice chatting. So far this message is about 400 bytes long. So maybe just double what you see and that's that."
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/detail_item_message_text"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:autoLink="web"
-                app:layout_constraintTop_toBottomOf="@id/detail_item_title_text"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="12dp"
-                app:layout_constraintBottom_toTopOf="@id/detail_item_attachment_image" app:layout_constraintEnd_toStartOf="@id/detail_item_icon" android:layout_marginEnd="6dp"/>
-        <TextView
-                android:text="This is an optional title. It can also be a little longer but not too long."
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/detail_item_title_text"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:autoLink="web"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="12dp" android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/detail_item_date_text" app:layout_constraintEnd_toStartOf="@id/detail_item_icon" android:layout_marginEnd="6dp" tools:layout_constraintEnd_toStartOf="@id/detail_item_icon"/>
-        <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp" app:srcCompat="@drawable/ic_priority_5_24dp"
-                android:id="@+id/detail_item_priority_image"
-                app:layout_constraintStart_toEndOf="@+id/detail_item_date_text"
-                app:layout_constraintTop_toTopOf="@+id/detail_item_date_text"
-                app:layout_constraintBottom_toBottomOf="@+id/detail_item_date_text" android:layout_marginStart="5dp"/>
-        <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_cancel_gray_24dp"
-                android:id="@+id/detail_item_attachment_image" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@id/detail_item_message_text"
-                android:layout_marginStart="12dp" android:layout_marginEnd="6dp"
-                android:scaleType="centerCrop"
-                android:adjustViewBounds="true" android:maxHeight="150dp" android:layout_marginTop="7dp"
-                app:shapeAppearanceOverlay="@style/roundedCornersImageView" android:visibility="visible"
-                android:layout_marginBottom="3dp" app:layout_constraintBottom_toTopOf="@id/detail_item_tags_text"/>
-        <TextView
-                android:text="Tags: ssh, zfs"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/detail_item_tags_text"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="12dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="6dp"
-                app:layout_constraintTop_toBottomOf="@id/detail_item_attachment_image"
-                app:layout_constraintBottom_toTopOf="@id/detail_item_attachment_file_box"
-                app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="2dp"
-        />
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@id/detail_item_tags_text"
-                android:id="@+id/detail_item_attachment_file_box" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="12dp" android:layout_marginEnd="6dp"
-                android:visibility="visible" android:layout_marginTop="2dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true" android:focusable="true" android:padding="4dp" android:paddingStart="0dp">
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" app:srcCompat="@drawable/ic_cancel_gray_24dp"
-                    android:id="@+id/detail_item_attachment_file_icon" app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/detail_item_attachment_file_info" android:layout_marginEnd="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-            />
-            <TextView
-                    android:text="attachment.jpg\n58 MB, not downloaded, expires 1/2/2022 10:30 PM"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/detail_item_attachment_file_info"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:layout_constraintStart_toEndOf="@+id/detail_item_attachment_file_icon"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/detail_item_attachment_file_icon"
-                    app:layout_constraintBottom_toBottomOf="@+id/detail_item_attachment_file_icon"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/detail_item_attachment_file_box"
-                android:id="@+id/detail_item_actions_wrapper"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="4dp"
-                android:visibility="gone"
-                android:padding="0dp" android:layout_marginStart="4dp" android:layout_marginTop="4dp">
+            app:layout_constraintGuide_begin="27dp"/>
 
-            <com.google.android.material.button.MaterialButton
-                    android:text="Bing it"
-                    style="?attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/button2" tools:layout_editor_absoluteY="4dp" tools:layout_editor_absoluteX="171dp" android:textSize="14sp" tools:visibility="visible"/>
-            <com.google.android.material.button.MaterialButton
-                    android:text="Google it"
-                    style="?attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/button3" tools:visibility="visible" tools:layout_editor_absoluteY="52dp" tools:layout_editor_absoluteX="4dp" android:textSize="14sp"/>
-            <com.google.android.material.button.MaterialButton
-                    android:text="DuckDuckGo it"
-                    style="?attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/button1" tools:visibility="visible" tools:layout_editor_absoluteY="4dp" tools:layout_editor_absoluteX="4dp" android:textSize="14sp" android:layout_margin="0dp"/>
-            <androidx.constraintlayout.helper.widget.Flow
-                    android:id="@+id/detail_item_actions_flow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:flow_wrapMode="chain2"
-                    app:flow_horizontalStyle="packed"
-                    app:flow_verticalBias="0"
-                    app:flow_verticalGap="0dp"
-                    app:flow_verticalStyle="packed"
-                    app:flow_verticalAlign="top"
-                    app:flow_horizontalBias="0"
-                    app:flow_horizontalGap="0dp"
-                    app:flow_horizontalAlign="start"
-                    app:flow_firstHorizontalBias="0"
-                    app:flow_firstVerticalBias="0"
-                    app:flow_firstHorizontalStyle="packed"
-                    app:flow_firstVerticalStyle="packed"
-                    app:flow_maxElementsWrap="3"
-                    android:layout_margin="0dp"
-                    android:padding="0dp"
-                    app:constraint_referenced_ids="button1,button2,button3"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:id="@+id/detail_item_padding_bottom"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/detail_item_actions_wrapper" app:layout_constraintBottom_toBottomOf="parent"/>
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                app:srcCompat="@drawable/ic_notification"
-                android:id="@+id/detail_item_icon"
-                android:visibility="visible"
-                android:maxHeight="40dp"
-                android:maxWidth="40dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitStart"
-                android:padding="0dp"
-                app:layout_constraintTop_toTopOf="@+id/detail_item_date_text"
-                app:layout_constraintBottom_toBottomOf="@+id/detail_item_message_text"
-                app:layout_constraintEnd_toStartOf="@id/detail_item_menu_button"
-                android:layout_marginEnd="6dp"/>
-        <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/guideline2" app:layout_constraintGuide_begin="27dp" android:orientation="horizontal"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

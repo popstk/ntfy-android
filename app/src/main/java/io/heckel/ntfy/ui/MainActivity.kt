@@ -139,6 +139,13 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+
+        if (!OnboardingActivity.isOnboardingDone(this)) {
+            startActivity(Intent(this, OnboardingActivity::class.java))
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_main)
 
         Log.init(this) // Init logs in all entry points
@@ -537,7 +544,20 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
         showHideNotificationMenuItems()
         showHideConnectionErrorMenuItem(repository.getConnectionDetails())
         checkSubscriptionsMuted() // This is done here, because then we know that we've initialized the menu
+        updateDarkModeToggleIcon()
         return true
+    }
+
+    private fun updateDarkModeToggleIcon() {
+        if (!this::menu.isInitialized) return
+        val toggleItem = menu.findItem(R.id.main_menu_dark_mode_toggle) ?: return
+        val tint = Colors.toolbarTextColor(this, repository.getDynamicColorsEnabled(), isDarkThemeOn(this))
+        if (isDarkThemeOn(this)) {
+            toggleItem.setIcon(R.drawable.ic_light_mode_white_24dp)
+        } else {
+            toggleItem.setIcon(R.drawable.ic_dark_mode_white_24dp)
+        }
+        toggleItem.icon?.setTint(tint)
     }
 
     private fun checkSubscriptionsMuted(delayMillis: Long = 0L) {
@@ -612,6 +632,16 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.main_menu_dark_mode_toggle -> {
+                val newMode = if (isDarkThemeOn(this)) {
+                    AppCompatDelegate.MODE_NIGHT_NO
+                } else {
+                    AppCompatDelegate.MODE_NIGHT_YES
+                }
+                repository.setDarkMode(newMode)
+                AppCompatDelegate.setDefaultNightMode(newMode)
+                true
+            }
             R.id.main_menu_notifications_enabled -> {
                 onNotificationSettingsClick(enable = false)
                 true

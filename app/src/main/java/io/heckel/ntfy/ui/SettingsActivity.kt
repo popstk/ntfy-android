@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -89,6 +90,16 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPrefere
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars =
             Colors.shouldUseLightStatusBar(dynamicColors, darkMode)
 
+        // Populate settings header
+        try {
+            val headerServer = findViewById<TextView>(R.id.settings_header_server)
+            val headerVersion = findViewById<TextView>(R.id.settings_header_version)
+            val defaultBaseUrl = repository.getDefaultBaseUrl() ?: getString(R.string.app_base_url)
+            headerServer?.text = defaultBaseUrl.removePrefix("https://").removePrefix("http://")
+            val versionName = packageManager.getPackageInfo(packageName, 0).versionName
+            headerVersion?.text = "v$versionName"
+        } catch (_: Exception) {}
+
         if (savedInstanceState == null) {
             settingsFragment = SettingsFragment() // Empty constructor!
             supportFragmentManager
@@ -163,6 +174,20 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPrefere
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.main_preferences, rootKey)
+
+            // Remove preference list dividers for cleaner look
+            setDivider(null)
+            setDividerHeight(0)
+
+            // Apply custom category header layout to all PreferenceCategory items
+            preferenceScreen?.let { screen ->
+                for (i in 0 until screen.preferenceCount) {
+                    val pref = screen.getPreference(i)
+                    if (pref is androidx.preference.PreferenceCategory) {
+                        pref.setLayoutResource(R.layout.preference_category_header)
+                    }
+                }
+            }
 
             // Dependencies (Fragments need a default constructor)
             repository = Repository.getInstance(requireActivity())

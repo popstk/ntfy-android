@@ -54,6 +54,7 @@
         <item name="actionModeStyle">@style/ActionMode</item>
         <item name="actionModeCloseButtonStyle">@style/ActionModeCloseButtonStyle</item>
         <item name="actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
+
     </style>
 
     <style name="OverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow" />

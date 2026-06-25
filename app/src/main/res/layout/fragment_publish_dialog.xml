@@ -71,6 +71,7 @@
                 <!-- Title (toggleable) -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/publish_dialog_title_layout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -91,6 +92,7 @@
                 <!-- Message -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/publish_dialog_message_layout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -112,6 +114,7 @@
                 <!-- Tags (toggleable) -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/publish_dialog_tags_layout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -150,6 +153,7 @@
                 <!-- Click URL field -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/publish_dialog_click_url_layout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -170,6 +174,7 @@
                 <!-- Email field -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/publish_dialog_email_layout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -190,6 +195,7 @@
                 <!-- Delay field -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/publish_dialog_delay_layout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -210,6 +216,7 @@
                 <!-- Attach URL field -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/publish_dialog_attach_url_layout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -239,6 +246,7 @@
                 <!-- Attachment filename field (shared between attach URL and attach file) -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/publish_dialog_attach_filename_layout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -259,6 +267,7 @@
                 <!-- Phone Call field -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/publish_dialog_phone_call_layout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"

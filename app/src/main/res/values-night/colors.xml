@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="md_theme_primary">#85ADFF</color>
-    <color name="md_theme_onPrimary">#002C66</color>
-    <color name="md_theme_primaryContainer">#6E9FFF</color>
-    <color name="md_theme_onPrimaryContainer">#002150</color>
+    <color name="md_theme_primary">#5089F6</color>
+    <color name="md_theme_onPrimary">#E8EFFF</color>
+    <color name="md_theme_primaryContainer">#1D3A7A</color>
+    <color name="md_theme_onPrimaryContainer">#A8C4FF</color>
     <color name="md_theme_secondary">#8097FF</color>
     <color name="md_theme_onSecondary">#00175F</color>
     <color name="md_theme_secondaryContainer">#213DA1</color>
@@ -16,14 +16,14 @@
     <color name="md_theme_onError">#690005</color>
     <color name="md_theme_errorContainer">#93000A</color>
     <color name="md_theme_onErrorContainer">#FFDAD6</color>
-    <color name="md_theme_background">#121212</color>
-    <color name="md_theme_onBackground">#E0E0E0</color>
-    <color name="md_theme_surface">#121212</color>
-    <color name="md_theme_onSurface">#E0E0E0</color>
-    <color name="md_theme_surfaceVariant">#3F4946</color>
-    <color name="md_theme_onSurfaceVariant">#C0C0C0</color>
-    <color name="md_theme_outline">#89938F</color>
-    <color name="md_theme_outlineVariant">#3F4946</color>
+    <color name="md_theme_background">#07080E</color>
+    <color name="md_theme_onBackground">#E2E4F0</color>
+    <color name="md_theme_surface">#07080E</color>
+    <color name="md_theme_onSurface">#E2E4F0</color>
+    <color name="md_theme_surfaceVariant">#1D1F30</color>
+    <color name="md_theme_onSurfaceVariant">#9A9CB8</color>
+    <color name="md_theme_outline">#454766</color>
+    <color name="md_theme_outlineVariant">#2A2C42</color>
     <color name="md_theme_scrim">#000000</color>
     <color name="md_theme_inverseSurface">#E0E0E0</color>
     <color name="md_theme_inverseOnSurface">#2B3230</color>
@@ -40,13 +40,13 @@
     <color name="md_theme_onTertiaryFixed">#3E0047</color>
     <color name="md_theme_tertiaryFixedDim">#E28CE9</color>
     <color name="md_theme_onTertiaryFixedVariant">#681C73</color>
-    <color name="md_theme_surfaceDim">#121212</color>
-    <color name="md_theme_surfaceBright">#383838</color>
-    <color name="md_theme_surfaceContainerLowest">#0D0D0D</color>
-    <color name="md_theme_surfaceContainerLow">#1B1B1B</color>
-    <color name="md_theme_surfaceContainer">#1B2023</color>
-    <color name="md_theme_surfaceContainerHigh">#282F33</color>
-    <color name="md_theme_surfaceContainerHighest">#333333</color>
+    <color name="md_theme_surfaceDim">#07080E</color>
+    <color name="md_theme_surfaceBright">#23253A</color>
+    <color name="md_theme_surfaceContainerLowest">#050609</color>
+    <color name="md_theme_surfaceContainerLow">#0C0D16</color>
+    <color name="md_theme_surfaceContainer">#11121D</color>
+    <color name="md_theme_surfaceContainerHigh">#171826</color>
+    <color name="md_theme_surfaceContainerHighest">#1D1F30</color>
     <color name="md_theme_primary_mediumContrast">#98B8FF</color>
     <color name="md_theme_onPrimary_mediumContrast">#002A61</color>
     <color name="md_theme_primaryContainer_mediumContrast">#6E9FFF</color>
@@ -142,10 +142,17 @@
     <color name="md_theme_surfaceContainerHigh_highContrast">#363D3A</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#424846</color>
 
-    <color name="action_bar">#1B2023</color> <!-- md_theme_surfaceContainer (dark) - matches card color -->
-    <color name="detail_activity_background">#121212</color> <!-- Black for detail activity in dark mode -->
+    <color name="action_bar">#0C0D16</color>
+    <color name="detail_activity_background">#07080E</color>
 
     <!-- Chip colors -->
     <color name="chip_background_color">#2C2C2C</color> <!-- Dark gray background -->
     <color name="chip_background_checked">#4A4A4A</color> <!-- Lighter when selected in dark mode -->
+
+    <!-- Priority bar colors (dark) -->
+    <color name="priority_max">#F27878</color>
+    <color name="priority_high">#F5B060</color>
+    <color name="priority_default">#6B9EFA</color>
+    <color name="priority_low">#62AC7E</color>
+    <color name="priority_min">#7074A0</color>
 </resources>

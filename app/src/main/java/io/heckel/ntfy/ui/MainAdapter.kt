@@ -113,8 +113,16 @@ class MainAdapter(
             val showMutedUntilIcon = !showMutedForeverIcon && (subscription.mutedUntil > 1L || globalMutedUntil > 1L) && !isUnifiedPush
             if (subscription.icon != null) {
                 imageView.setImageBitmap(subscription.icon.readBitmapFromUriOrNull(context))
+                androidx.core.widget.ImageViewCompat.setImageTintList(imageView, null)
             } else {
                 imageView.setImageResource(R.drawable.ic_sms_gray_24dp)
+                val tintColor = com.google.android.material.color.MaterialColors.getColor(
+                    context, com.google.android.material.R.attr.colorOnPrimaryContainer, android.graphics.Color.BLUE
+                )
+                androidx.core.widget.ImageViewCompat.setImageTintList(
+                    imageView,
+                    android.content.res.ColorStateList.valueOf(tintColor)
+                )
             }
             nameView.text = displayName(appBaseUrl, subscription)
             statusView.text = statusMessage

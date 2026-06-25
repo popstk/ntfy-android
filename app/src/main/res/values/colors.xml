@@ -152,4 +152,11 @@
     <!-- Remove black status bar in Action mode: https://stackoverflow.com/a/79456725 -->
     <color name="abc_decor_view_status_guard" tools:override="true">@android:color/transparent</color>
     <color name="abc_decor_view_status_guard_light" tools:override="true">@android:color/transparent</color>
+
+    <!-- Priority bar colors (light) -->
+    <color name="priority_max">#EF5656</color>
+    <color name="priority_high">#F0972A</color>
+    <color name="priority_default">#5089F6</color>
+    <color name="priority_low">#4C9968</color>
+    <color name="priority_min">#5A5E80</color>
 </resources>

@@ -94,6 +94,7 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
         private val layout: View = itemView.findViewById(R.id.detail_item_layout)
         private val cardView: CardView = itemView.findViewById(R.id.detail_item_card)
         private val priorityImageView: ImageView = itemView.findViewById(R.id.detail_item_priority_image)
+        private val priorityBarView: View = itemView.findViewById(R.id.detail_item_priority_bar)
         private val dateView: TextView = itemView.findViewById(R.id.detail_item_date_text)
         private val titleView: TextView = itemView.findViewById(R.id.detail_item_title_text)
         private val messageView: TextView = itemView.findViewById(R.id.detail_item_message_text)
@@ -174,6 +175,14 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
         }
 
         private fun renderPriority(context: Context, notification: Notification) {
+            val barColor = when (notification.priority) {
+                PRIORITY_MIN  -> ContextCompat.getColor(context, R.color.priority_min)
+                PRIORITY_LOW  -> ContextCompat.getColor(context, R.color.priority_low)
+                PRIORITY_HIGH -> ContextCompat.getColor(context, R.color.priority_high)
+                PRIORITY_MAX  -> ContextCompat.getColor(context, R.color.priority_max)
+                else          -> ContextCompat.getColor(context, R.color.priority_default)
+            }
+            priorityBarView.setBackgroundColor(barColor)
             when (notification.priority) {
                 PRIORITY_MIN -> {
                     priorityImageView.visibility = View.VISIBLE
