@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 建议话题图标的蓝色圆形底，匹配设计稿 S7 .sr-ico -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <gradient
+        android:startColor="#5B8EF0"
+        android:endColor="#7C4DFF"
+        android:angle="135"/>
+</shape>
