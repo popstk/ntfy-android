@@ -148,7 +148,8 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
             }
             if (unmatchedTags.isNotEmpty()) {
                 tagsView.visibility = View.VISIBLE
-                tagsView.text = context.getString(R.string.detail_item_tags, unmatchedTags.joinToString(", "))
+                // 井号胶囊样式，匹配设计稿 .tag（如 #alert #critical）
+                tagsView.text = unmatchedTags.joinToString(" ") { "#$it" }
             } else {
                 tagsView.visibility = View.GONE
             }
