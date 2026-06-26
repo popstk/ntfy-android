@@ -170,6 +170,11 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
         setSupportActionBar(toolbar)
         title = getString(R.string.main_action_bar_title)
 
+        // 渐变 AppBar：渐变由 app_bar_drawer 里的普通 View(@id/toolbar_gradient) 承载，
+        // 工具栏本身透明叠在其上，让背后渐变透出。
+        toolbar.setBackgroundColor(Color.TRANSPARENT)
+        toolbar.setTitleTextColor(whiteColor)
+
         // Gradient appbar = dark icons not needed
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 

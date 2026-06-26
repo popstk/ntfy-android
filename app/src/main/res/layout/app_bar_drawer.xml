@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ColorOS 16 渐变 AppBar。
+  关键：MaterialToolbar / AppBarLayout 在本机 (ColorOS) 上会用 colorSurface 强制覆盖
+  drawable 背景，导致渐变 drawable 不渲染。解决办法是把渐变放在一个普通 View 上
+  （普通 View 的 drawable 一定会渲染），再让 MaterialToolbar 背景透明叠在其上。
+-->
 <com.google.android.material.appbar.AppBarLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,12 +13,30 @@
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
     android:fitsSystemWindows="true"
-    android:background="@drawable/gradient_appbar"
+    android:background="@android:color/transparent"
+    android:elevation="0dp"
+    app:elevation="0dp"
     app:liftOnScroll="false">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <!-- 渐变背景层（普通 View，drawable 一定渲染） -->
+        <View
+            android:id="@+id/toolbar_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_appbar" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:titleTextColor="@android:color/white" />
+
+    </FrameLayout>
 
 </com.google.android.material.appbar.AppBarLayout>
