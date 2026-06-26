@@ -102,6 +102,10 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
     private lateinit var adapter: MainAdapter
     private lateinit var fab: FloatingActionButton
 
+    // 首页搜索：保存完整列表 + 当前搜索词，过滤后再提交给 adapter
+    private var allSubscriptions: List<Subscription> = emptyList()
+    private var searchQuery: String = ""
+
     // Other stuff
     private var networkCallback: ConnectivityManager.NetworkCallback? = null
     private var workManager: WorkManager? = null // Context-dependent
@@ -214,7 +218,19 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
             Colors.onPrimary(this)
         )
         mainList.adapter = adapter
-        
+
+        // 首页搜索框（设计稿 S0）：输入时按话题名/URL 过滤订阅列表
+        val searchBox = findViewById<View>(R.id.toolbar_search_box)
+        val searchInput = findViewById<android.widget.EditText>(R.id.toolbar_search_input)
+        searchInput.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) {
+                searchQuery = s?.toString()?.trim() ?: ""
+                applySearchFilter()
+            }
+        })
+
         // Apply window insets to ensure content is not covered by navigation bar
         mainList.clipToPadding = false
         ViewCompat.setOnApplyWindowInsetsListener(mainList) { v, insets ->
@@ -225,14 +241,17 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
 
         viewModel.list().observe(this) {
             it?.let { subscriptions ->
-                // Update main list
-                adapter.submitList(subscriptions as MutableList<Subscription>)
+                // 保存完整列表，按当前搜索词过滤后再提交给 adapter
+                allSubscriptions = subscriptions
+                applySearchFilter()
                 if (it.isEmpty()) {
                     mainListContainer.visibility = View.GONE
                     noEntries.visibility = View.VISIBLE
+                    searchBox.visibility = View.GONE
                 } else {
                     mainListContainer.visibility = View.VISIBLE
                     noEntries.visibility = View.GONE
+                    searchBox.visibility = View.VISIBLE
                 }
 
                 // Add scrub terms to log (in case it gets exported)
@@ -776,6 +795,21 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
 
         // Switch to detail view after adding it
         onSubscriptionItemClick(subscription)
+    }
+
+    // 按搜索词过滤订阅（话题名/显示名/服务器），结果提交给 adapter
+    private fun applySearchFilter() {
+        val q = searchQuery.lowercase()
+        val filtered = if (q.isEmpty()) {
+            allSubscriptions
+        } else {
+            allSubscriptions.filter { sub ->
+                displayName(appBaseUrl, sub).lowercase().contains(q) ||
+                    sub.topic.lowercase().contains(q) ||
+                    shortUrl(sub.baseUrl).lowercase().contains(q)
+            }
+        }
+        adapter.submitList(filtered.toMutableList())
     }
 
     private fun onSubscriptionItemClick(subscription: Subscription) {

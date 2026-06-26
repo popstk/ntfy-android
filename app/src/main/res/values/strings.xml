@@ -66,6 +66,7 @@
 
     <!-- Main activity: Action bar -->
     <string name="main_action_bar_title">Subscribed topics</string>
+    <string name="main_search_hint">Search topics…</string>
     <string name="main_menu_connection_error">Connection error</string>
     <string name="main_menu_notifications_enabled">Notifications on</string>
     <string name="main_menu_notifications_disabled_forever">Notifications muted</string>

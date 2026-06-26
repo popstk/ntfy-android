@@ -14,6 +14,7 @@
     <string name="main_menu_rate_title">给应用打个分吧⭐</string>
     <string name="main_action_mode_delete_dialog_message">您确定不再订阅选中的主题，并且永久删除所有您收到的通知吗？</string>
     <string name="main_action_bar_title">订阅的主题</string>
+    <string name="main_search_hint">搜索话题…</string>
     <string name="main_action_mode_delete_dialog_permanently_delete">永久删除</string>
     <string name="main_action_mode_delete_dialog_cancel">取消</string>
     <string name="main_item_status_reconnecting">正在重新连接……</string>
