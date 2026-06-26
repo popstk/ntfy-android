@@ -182,7 +182,7 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
                 PRIORITY_MAX  -> ContextCompat.getColor(context, R.color.priority_max)
                 else          -> ContextCompat.getColor(context, R.color.priority_default)
             }
-            priorityBarView.setBackgroundColor(barColor)
+            priorityBarView.backgroundTintList = android.content.res.ColorStateList.valueOf(barColor)
             when (notification.priority) {
                 PRIORITY_MIN -> {
                     priorityImageView.visibility = View.VISIBLE

@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <color name="md_theme_primary">#0057BD</color>
-    <color name="md_theme_onPrimary">#F0F2FF</color>
-    <color name="md_theme_primaryContainer">#6E9FFF</color>
-    <color name="md_theme_onPrimaryContainer">#002150</color>
-    <color name="md_theme_secondary">#3A53B7</color>
-    <color name="md_theme_onSecondary">#F2F1FF</color>
-    <color name="md_theme_secondaryContainer">#C7CFFF</color>
-    <color name="md_theme_onSecondaryContainer">#223EA2</color>
-    <color name="md_theme_tertiary">#893C92</color>
-    <color name="md_theme_onTertiary">#FFEEFB</color>
-    <color name="md_theme_tertiaryContainer">#F199F7</color>
-    <color name="md_theme_onTertiaryContainer">#5E106A</color>
+    <!-- ColorOS 16 主色调：蓝紫渐变系，起点 #5B8EF0 -->
+    <color name="md_theme_primary">#5B8EF0</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_primaryContainer">#E3ECFF</color>
+    <color name="md_theme_onPrimaryContainer">#001945</color>
+    <color name="md_theme_secondary">#8890A4</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_secondaryContainer">#EEF0F8</color>
+    <color name="md_theme_onSecondaryContainer">#1A1A2E</color>
+    <color name="md_theme_tertiary">#8B5CF6</color>
+    <color name="md_theme_onTertiary">#FFFFFF</color>
+    <color name="md_theme_tertiaryContainer">#EDE0FF</color>
+    <color name="md_theme_onTertiaryContainer">#21005D</color>
     <color name="md_theme_error">#BA1A1A</color>
     <color name="md_theme_onError">#FFFFFF</color>
     <color name="md_theme_errorContainer">#FFDAD6</color>
-    <color name="md_theme_onErrorContainer">#93000A</color>
-    <color name="md_theme_background">#FFFFFF</color>
-    <color name="md_theme_onBackground">#171D1B</color>
+    <color name="md_theme_onErrorContainer">#410002</color>
+    <color name="md_theme_background">#F5F6FA</color>
+    <color name="md_theme_onBackground">#1A1A2E</color>
     <color name="md_theme_surface">#FFFFFF</color>
-    <color name="md_theme_onSurface">#171D1B</color>
-    <color name="md_theme_surfaceVariant">#E0E0E0</color>
-    <color name="md_theme_onSurfaceVariant">#3F4946</color>
-    <color name="md_theme_outline">#6F7976</color>
-    <color name="md_theme_outlineVariant">#C0C0C0</color>
+    <color name="md_theme_onSurface">#1A1A2E</color>
+    <color name="md_theme_surfaceVariant">#EEF0F8</color>
+    <color name="md_theme_onSurfaceVariant">#8890A4</color>
+    <color name="md_theme_outline">#C4C9D9</color>
+    <color name="md_theme_outlineVariant">#E4E7F2</color>
     <color name="md_theme_scrim">#000000</color>
     <color name="md_theme_inverseSurface">#2B3230</color>
     <color name="md_theme_inverseOnSurface">#F0F0F0</color>
@@ -43,10 +44,10 @@
     <color name="md_theme_surfaceDim">#E0E0E0</color>
     <color name="md_theme_surfaceBright">#FFFFFF</color>
     <color name="md_theme_surfaceContainerLowest">#FFFFFF</color>
-    <color name="md_theme_surfaceContainerLow">#F5F5F5</color>
-    <color name="md_theme_surfaceContainer">#F0F0F0</color>
-    <color name="md_theme_surfaceContainerHigh">#EEEEEE</color>
-    <color name="md_theme_surfaceContainerHighest">#E0E0E0</color>
+    <color name="md_theme_surfaceContainerLow">#F5F6FA</color>
+    <color name="md_theme_surfaceContainer">#EEF0F8</color>
+    <color name="md_theme_surfaceContainerHigh">#E8EBF5</color>
+    <color name="md_theme_surfaceContainerHighest">#E0E4F0</color>
     <color name="md_theme_primary_mediumContrast">#003C86</color>
     <color name="md_theme_onPrimary_mediumContrast">#C2D4FF</color>
     <color name="md_theme_primaryContainer_mediumContrast">#006FED</color>
@@ -142,12 +143,12 @@
     <color name="md_theme_surfaceContainerHigh_highContrast">#CFD6D2</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#C1C8C5</color>
 
-    <color name="action_bar">#0057BD</color> <!-- md_theme_primary (light) -->
-    <color name="detail_activity_background">#EEEEEE</color> <!-- Light gray for detail activity in light mode -->
+    <color name="action_bar">#5B8EF0</color>
+    <color name="detail_activity_background">#F5F6FA</color>
 
     <!-- Chip colors -->
-    <color name="chip_background_color">#E8E8E8</color> <!-- Light gray background -->
-    <color name="chip_background_checked">#BDBDBD</color> <!-- Darker when selected -->
+    <color name="chip_background_color">#DEE3EC</color>
+    <color name="chip_background_checked">#C2C7CF</color>
 
     <!-- Remove black status bar in Action mode: https://stackoverflow.com/a/79456725 -->
     <color name="abc_decor_view_status_guard" tools:override="true">@android:color/transparent</color>
@@ -159,4 +160,21 @@
     <color name="priority_default">#5089F6</color>
     <color name="priority_low">#4C9968</color>
     <color name="priority_min">#5A5E80</color>
+
+    <!-- Channel icon background colors (6 variants for subscription color rotation) -->
+    <color name="icon_bg_blue">#E3ECFF</color>
+    <color name="icon_fg_blue">#3A6DE8</color>
+    <color name="icon_bg_purple">#EDE0FF</color>
+    <color name="icon_fg_purple">#7C4DFF</color>
+    <color name="icon_bg_green">#D6F5E3</color>
+    <color name="icon_fg_green">#1E8A4C</color>
+    <color name="icon_bg_amber">#FFF3D6</color>
+    <color name="icon_fg_amber">#C87800</color>
+    <color name="icon_bg_teal">#D0F4F7</color>
+    <color name="icon_fg_teal">#0097A7</color>
+    <color name="icon_bg_red">#FFE0E0</color>
+    <color name="icon_fg_red">#D32F2F</color>
+
+    <!-- Tag chip color -->
+    <color name="tag_text_color">#5B8EF0</color>
 </resources>

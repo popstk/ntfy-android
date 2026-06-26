@@ -1,130 +1,149 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
                   app:title="@string/settings_title">
     <PreferenceCategory
-            app:title="@string/settings_notifications_header"
-            app:icon="@drawable/ic_pref_bell">
+            app:title="@string/settings_notifications_header">
         <ListPreference
                 app:key="@string/settings_notifications_muted_until_key"
                 app:title="@string/settings_notifications_muted_until_title"
                 app:entries="@array/settings_notifications_muted_until_entries"
                 app:entryValues="@array/settings_notifications_muted_until_values"
+                app:icon="@drawable/ic_pref_mute_colored"
                 app:defaultValue="0"/>
         <ListPreference
             app:key="@string/settings_notifications_min_priority_key"
             app:title="@string/settings_notifications_min_priority_title"
             app:entries="@array/settings_notifications_min_priority_entries"
             app:entryValues="@array/settings_notifications_min_priority_values"
+            app:icon="@drawable/ic_pref_priority_colored"
             app:defaultValue="1"/>
         <ListPreference
                 app:key="@string/settings_notifications_auto_download_key"
                 app:title="@string/settings_notifications_auto_download_title"
                 app:entries="@array/settings_notifications_auto_download_entries"
                 app:entryValues="@array/settings_notifications_auto_download_values"
+                app:icon="@drawable/ic_pref_download_colored"
                 app:defaultValue="1"/>
         <ListPreference
                 app:key="@string/settings_notifications_auto_delete_key"
                 app:title="@string/settings_notifications_auto_delete_title"
                 app:entries="@array/settings_notifications_auto_delete_entries"
                 app:entryValues="@array/settings_notifications_auto_delete_values"
+                app:icon="@drawable/ic_pref_delete_colored"
                 app:defaultValue="2592000"/>
         <SwitchPreferenceCompat
                 app:key="@string/settings_notifications_insistent_max_priority_key"
                 app:title="@string/settings_notifications_insistent_max_priority_title"
+                app:icon="@drawable/ic_pref_vibrate_colored"
                 app:defaultValue="false"/>
         <Preference
                 app:key="@string/settings_notifications_channel_prefs_key"
                 app:title="@string/settings_notifications_channel_prefs_title"
-                app:summary="@string/settings_notifications_channel_prefs_summary"/>
+                app:summary="@string/settings_notifications_channel_prefs_summary"
+                app:icon="@drawable/ic_pref_channel_colored"/>
     </PreferenceCategory>
     <PreferenceCategory
             app:title="@string/settings_general_header"
-            app:icon="@drawable/ic_pref_cloud">
+            app:icon="@drawable/ic_pref_cloud_colored">
         <Preference
                 app:key="@string/settings_general_default_base_url_key"
-                app:title="@string/settings_general_default_base_url_title" />
+                app:title="@string/settings_general_default_base_url_title"
+                app:icon="@drawable/ic_pref_cloud_colored"/>
         <Preference
                 app:key="@string/settings_general_users_key"
                 app:title="@string/settings_general_users_title"
                 app:summary="@string/settings_general_users_summary"
-                app:icon="@drawable/ic_pref_person"
+                app:icon="@drawable/ic_pref_person_colored"
                 app:fragment="io.heckel.ntfy.ui.SettingsActivity$UserSettingsFragment"/>
         <ListPreference
                 app:key="@string/settings_general_language_key"
-                app:title="@string/settings_general_language_title"/>
+                app:title="@string/settings_general_language_title"
+                app:icon="@drawable/ic_pref_cloud_colored"/>
     </PreferenceCategory>
     <PreferenceCategory
             app:title="@string/settings_appearance_header"
-            app:icon="@drawable/ic_pref_palette">
+            app:icon="@drawable/ic_pref_palette_colored">
         <ListPreference
                 app:key="@string/settings_general_dark_mode_key"
                 app:title="@string/settings_general_dark_mode_title"
                 app:entries="@array/settings_general_dark_mode_entries"
                 app:entryValues="@array/settings_general_dark_mode_values"
+                app:icon="@drawable/ic_pref_palette_colored"
                 app:defaultValue="-1"/>
         <SwitchPreferenceCompat
                 app:key="@string/settings_general_dynamic_colors_key"
                 app:title="@string/settings_general_dynamic_colors_title"
+                app:icon="@drawable/ic_pref_palette_colored"
                 app:isPreferenceVisible="false"/>
         <SwitchPreferenceCompat
                 app:key="@string/settings_general_message_bar_key"
                 app:title="@string/settings_general_message_bar_title"
+                app:icon="@drawable/ic_pref_palette_colored"
                 app:defaultValue="true"/>
     </PreferenceCategory>
     <PreferenceCategory
             app:title="@string/settings_backup_restore_header"
-            app:icon="@drawable/ic_pref_backup">
+            app:icon="@drawable/ic_pref_backup_colored">
         <ListPreference
                 app:key="@string/settings_backup_restore_backup_key"
                 app:title="@string/settings_backup_restore_backup_title"
                 app:summary="@string/settings_backup_restore_backup_summary"
                 app:entries="@array/settings_backup_restore_backup_entries"
                 app:entryValues="@array/settings_backup_restore_backup_values"
+                app:icon="@drawable/ic_pref_backup_colored"
                 app:defaultValue="everything"/>
         <Preference
                 app:key="@string/settings_backup_restore_restore_key"
                 app:title="@string/settings_backup_restore_restore_title"
-                app:summary="@string/settings_backup_restore_restore_summary"/>
+                app:summary="@string/settings_backup_restore_restore_summary"
+                app:icon="@drawable/ic_pref_backup_colored"/>
     </PreferenceCategory>
     <PreferenceCategory
             app:title="@string/settings_advanced_header"
-            app:icon="@drawable/ic_pref_tune">
+            app:icon="@drawable/ic_pref_tune_colored">
         <ListPreference
                 app:key="@string/settings_advanced_connection_alert_key"
                 app:title="@string/settings_advanced_connection_alert_title"
                 app:entries="@array/settings_advanced_connection_alert_entries"
                 app:entryValues="@array/settings_advanced_connection_alert_values"
+                app:icon="@drawable/ic_pref_tune_colored"
                 app:defaultValue="0"/>
         <ListPreference
                 app:key="@string/settings_advanced_connection_protocol_key"
                 app:title="@string/settings_advanced_connection_protocol_title"
                 app:entries="@array/settings_advanced_connection_protocol_entries"
                 app:entryValues="@array/settings_advanced_connection_protocol_values"
+                app:icon="@drawable/ic_pref_tune_colored"
                 app:defaultValue="jsonhttp"/>
         <Preference
             app:key="@string/settings_advanced_exact_alarms_key"
-            app:title="@string/settings_advanced_exact_alarms_title"/>
+            app:title="@string/settings_advanced_exact_alarms_title"
+            app:icon="@drawable/ic_pref_tune_colored"/>
         <Preference
             app:key="@string/settings_advanced_custom_headers_key"
             app:title="@string/settings_advanced_custom_headers_title"
             app:summary="@string/settings_advanced_custom_headers_summary"
-            app:icon="@drawable/ic_pref_code"
+            app:icon="@drawable/ic_pref_code_colored"
             app:fragment="io.heckel.ntfy.ui.SettingsActivity$CustomHeaderSettingsFragment"/>
         <Preference
             app:key="@string/settings_advanced_certificates_key"
             app:title="@string/settings_advanced_certificates_title"
             app:summary="@string/settings_advanced_certificates_summary"
+            app:icon="@drawable/ic_pref_tune_colored"
             app:fragment="io.heckel.ntfy.ui.CertificateSettingsFragment"/>
         <SwitchPreferenceCompat
             app:key="@string/settings_advanced_broadcast_key"
             app:title="@string/settings_advanced_broadcast_title"
+            app:icon="@drawable/ic_pref_tune_colored"
             app:enabled="true"/>
         <SwitchPreferenceCompat
             app:key="@string/settings_advanced_unifiedpush_key"
             app:title="@string/settings_advanced_unifiedpush_title"
+            app:icon="@drawable/ic_pref_tune_colored"
             app:enabled="true"/>
         <SwitchPreferenceCompat
                 app:key="@string/settings_advanced_record_logs_key"
                 app:title="@string/settings_advanced_record_logs_title"
+                app:icon="@drawable/ic_pref_tune_colored"
                 app:enabled="true"/>
         <ListPreference
                 app:key="@string/settings_advanced_export_logs_key"
@@ -132,17 +151,20 @@
                 app:summary="@string/settings_advanced_export_logs_summary"
                 app:entries="@array/settings_advanced_export_logs_entries"
                 app:entryValues="@array/settings_advanced_export_logs_values"
+                app:icon="@drawable/ic_pref_tune_colored"
                 app:defaultValue="copy"/>
         <Preference
                 app:key="@string/settings_advanced_clear_logs_key"
                 app:title="@string/settings_advanced_clear_logs_title"
-                app:summary="@string/settings_advanced_clear_logs_summary"/>
+                app:summary="@string/settings_advanced_clear_logs_summary"
+                app:icon="@drawable/ic_pref_clear_colored"/>
     </PreferenceCategory>
     <PreferenceCategory
             app:title="@string/settings_about_header"
-            app:icon="@drawable/ic_pref_info">
+            app:icon="@drawable/ic_pref_info_colored">
         <Preference
                 app:key="@string/settings_about_version_key"
-                app:title="@string/settings_about_version_title"/>
+                app:title="@string/settings_about_version_title"
+                app:icon="@drawable/ic_pref_info_colored"/>
     </PreferenceCategory>
 </PreferenceScreen>

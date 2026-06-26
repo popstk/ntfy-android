@@ -6,14 +6,13 @@
     android:id="@+id/detail_item_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginTop="3dp"
-    android:layout_marginBottom="3dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="0dp"
-    app:strokeWidth="1dp"
-    app:strokeColor="?attr/colorOutlineVariant">
+    android:layout_marginStart="14dp"
+    android:layout_marginEnd="14dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detail_item_layout"
@@ -21,17 +20,19 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
         android:focusable="true"
-        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingEnd="10dp">
 
-        <!-- 优先级竖条（颜色由代码设置） -->
+        <!-- 优先级横条（顶部，颜色由代码设置） -->
         <View
             android:id="@+id/detail_item_priority_bar"
-            android:layout_width="3dp"
-            android:layout_height="0dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:background="@drawable/bg_priority_bar"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -41,11 +42,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurfaceVariant"
-            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_item_priority_bar"
             tools:text="10:43"/>
 
         <!-- 优先级图标（保留向后兼容） -->
@@ -67,6 +68,7 @@
             android:layout_height="7dp"
             android:layout_marginStart="6dp"
             android:background="@drawable/ic_circle"
+            android:backgroundTint="?attr/colorPrimary"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@id/detail_item_date_text"
             app:layout_constraintStart_toEndOf="@id/detail_item_priority_image"
@@ -75,8 +77,8 @@
         <!-- 三点菜单按钮 -->
         <ImageButton
             android:id="@+id/detail_item_menu_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:contentDescription="@null"
             app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +114,7 @@
             android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/detail_item_icon"
-            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_item_date_text"
             tools:text="标题"/>
 
@@ -129,7 +131,7 @@
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintBottom_toTopOf="@id/detail_item_attachment_image"
             app:layout_constraintEnd_toStartOf="@id/detail_item_icon"
-            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_item_title_text"
             tools:text="消息内容"/>
 
@@ -148,7 +150,7 @@
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/detail_item_tags_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_item_message_text"
             app:shapeAppearanceOverlay="@style/roundedCornersImageView"
             app:srcCompat="@drawable/ic_cancel_gray_24dp"/>
@@ -162,11 +164,12 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="6dp"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
-            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textColor="@color/tag_text_color"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/detail_item_attachment_file_box"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_item_attachment_image"
             tools:text="#ssh, #zfs"/>
 
@@ -185,7 +188,7 @@
             android:paddingStart="0dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_item_tags_text">
 
             <ImageView
@@ -224,7 +227,7 @@
             android:padding="0dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/detail_item_priority_bar"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_item_attachment_file_box">
 
             <androidx.constraintlayout.helper.widget.Flow

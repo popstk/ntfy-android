@@ -70,25 +70,14 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPrefere
         serviceManager = SubscriberServiceManager(this)
 
         val toolbarLayout = findViewById<View>(R.id.app_bar_drawer)
-        val dynamicColors = repository.getDynamicColorsEnabled()
-        val darkMode = isDarkThemeOn(this)
-        val statusBarColor = Colors.statusBarNormal(
-            this,
-            dynamicColors,
-            darkMode
-        )
-        val toolbarTextColor = Colors.toolbarTextColor(this, dynamicColors, darkMode)
-        toolbarLayout.setBackgroundColor(statusBarColor)
-        
-        val toolbar = toolbarLayout.findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
-        toolbar.setTitleTextColor(toolbarTextColor)
-        toolbar.setNavigationIconTint(toolbarTextColor)
-        toolbar.overflowIcon?.setTint(toolbarTextColor)
-        setSupportActionBar(toolbar)
-        
-        // Set system status bar appearance
-        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars =
-            Colors.shouldUseLightStatusBar(dynamicColors, darkMode)
+
+        val toolbar = toolbarLayout?.findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
+        toolbar?.setTitleTextColor(android.graphics.Color.WHITE)
+        toolbar?.setNavigationIconTint(android.graphics.Color.WHITE)
+        toolbar?.overflowIcon?.setTint(android.graphics.Color.WHITE)
+        if (toolbar != null) setSupportActionBar(toolbar)
+
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
         // Populate settings header
         try {
@@ -174,10 +163,6 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPrefere
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.main_preferences, rootKey)
-
-            // Remove preference list dividers for cleaner look
-            setDivider(null)
-            setDividerHeight(0)
 
             // Apply custom category header layout to all PreferenceCategory items
             preferenceScreen?.let { screen ->

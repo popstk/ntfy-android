@@ -51,6 +51,10 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="searchViewStyle">@style/AppSearchViewStyle</item>
 
+        <!-- ColorOS 16 圆角弹窗 -->
+        <item name="materialAlertDialogTheme">@style/ColorOSAlertDialog</item>
+        <item name="alertDialogTheme">@style/ColorOSAlertDialog</item>
+
         <item name="actionModeStyle">@style/ActionMode</item>
         <item name="actionModeCloseButtonStyle">@style/ActionModeCloseButtonStyle</item>
         <item name="actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
@@ -68,12 +72,27 @@
         <item name="android:textColor">?attr/colorError</item>
     </style>
 
+    <!-- ColorOS 16 圆角矩形 FAB (18dp 圆角) -->
     <style name="FloatingActionButton" parent="@style/Widget.Material3.FloatingActionButton.Primary">
         <item name="backgroundTint">?attr/colorPrimary</item>
         <item name="tint">?attr/colorOnPrimary</item>
+        <item name="shapeAppearance">@style/FabShapeAppearance</item>
     </style>
 
-    <style name="CardView" parent="@style/Widget.Material3.CardView.Elevated" />
+    <style name="FabShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item>
+    </style>
+
+    <style name="CardView" parent="@style/Widget.Material3.CardView.Elevated">
+        <item name="shapeAppearanceOverlay">@style/CardShapeAppearance</item>
+    </style>
+
+    <!-- ColorOS 16 大圆角卡片 (20dp) -->
+    <style name="CardShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
 
     <style name="CardViewBackground" />
 
@@ -102,14 +121,30 @@
         <item name="android:tint">@android:color/white</item>
     </style>
 
-    <!-- Banner style with reduced corner radius -->
+    <!-- Banner style: ColorOS 16 rounded card with margin -->
     <style name="BannerCardStyle" parent="Widget.Material3.CardView.Elevated">
         <item name="shapeAppearanceOverlay">@style/BannerShapeAppearance</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardBackgroundColor">@color/md_theme_surface</item>
+        <item name="android:layout_marginStart">14dp</item>
+        <item name="android:layout_marginEnd">14dp</item>
+        <item name="android:layout_marginTop">8dp</item>
     </style>
 
     <style name="BannerShapeAppearance">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">0dp</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- ColorOS 16 圆角弹窗：28dp 圆角，白色背景，与卡片风格一致 -->
+    <style name="ColorOSAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearance">@style/DialogShapeAppearance</item>
+        <item name="android:backgroundDimAmount">0.4</item>
+    </style>
+
+    <style name="DialogShapeAppearance" parent="ShapeAppearance.Material3.Corner.ExtraLarge">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
     </style>
 
     <!-- Full-screen dialog style for Material 3 compliance -->

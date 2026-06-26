@@ -1,51 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 设计稿 S2: set-hero 渐变背景区域 + 半透明卡片 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:paddingStart="20dp"
-    android:paddingEnd="20dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    android:background="?attr/colorSurfaceContainer">
+    android:orientation="vertical"
+    android:background="@drawable/gradient_appbar"
+    android:paddingStart="18dp"
+    android:paddingEnd="18dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="20dp">
 
-    <!-- ntfy 图标 -->
-    <ImageView
-        android:id="@+id/settings_header_icon"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:src="@mipmap/ic_launcher_round"/>
-
-    <!-- 文字区 -->
+    <!-- 半透明白色卡片: rgba(255,255,255,.18), 18dp圆角 -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginStart="14dp">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_settings_hero_card"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp">
 
-        <TextView
-            android:id="@+id/settings_header_server"
-            android:layout_width="wrap_content"
+        <!-- 白色圆角logo容器: 50x50, 15dp圆角 -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_settings_hero_logo">
+
+            <ImageView
+                android:id="@+id/settings_header_icon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_launcher_round"
+                android:scaleType="fitCenter"/>
+
+        </FrameLayout>
+
+        <!-- 文字区 -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="monospace"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="ntfy.sh"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="14dp">
 
+            <!-- 应用名: 18sp, 800weight, 白色 -->
+            <TextView
+                android:id="@+id/settings_header_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:text="ntfy"/>
+
+            <!-- 服务器URL: 12sp, 白色70% -->
+            <TextView
+                android:id="@+id/settings_header_server"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textSize="12sp"
+                android:textColor="#B3FFFFFF"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="ntfy.sh"/>
+
+        </LinearLayout>
+
+        <!-- 版本胶囊: rgba(255,255,255,.22)背景, 10dp圆角 -->
         <TextView
             android:id="@+id/settings_header_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:background="@drawable/bg_settings_hero_version"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:textSize="11sp"
-            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textStyle="bold"
+            android:textColor="#EBFFFFFF"
             android:text="v0.0.0"/>
 
     </LinearLayout>

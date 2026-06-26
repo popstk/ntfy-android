@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#5B8EF0"
+                android:endColor="#2962FF"
+                android:angle="135"
+                android:type="linear"/>
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+    <item
+        android:top="7dp" android:bottom="7dp"
+        android:left="7dp" android:right="7dp"
+        android:drawable="@drawable/ic_pref_cloud"
+        android:tint="#FFFFFF"/>
+</layer-list>

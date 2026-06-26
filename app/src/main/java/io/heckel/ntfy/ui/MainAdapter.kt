@@ -80,7 +80,18 @@ class MainAdapter(
         private val notificationDisabledForeverImageView: View = itemView.findViewById(R.id.main_item_notification_disabled_forever_image)
         private val instantImageView: View = itemView.findViewById(R.id.main_item_instant_image)
         private val newItemsView: TextView = itemView.findViewById(R.id.main_item_new)
+        private val iconContainerView: View = itemView.findViewById(R.id.main_item_icon_container)
+        private val letterView: TextView = itemView.findViewById(R.id.main_item_letter)
         private val appBaseUrl = context.getString(R.string.app_base_url)
+
+        private val iconGradients = listOf(
+            R.drawable.bg_channel_blue,
+            R.drawable.bg_channel_purple,
+            R.drawable.bg_channel_green,
+            R.drawable.bg_channel_amber,
+            R.drawable.bg_channel_teal,
+            R.drawable.bg_channel_red
+        )
 
         fun bind(subscription: Subscription) {
             this.subscription = subscription
@@ -111,18 +122,20 @@ class MainAdapter(
             val globalMutedUntil = repository.getGlobalMutedUntil()
             val showMutedForeverIcon = (subscription.mutedUntil == 1L || globalMutedUntil == 1L) && !isUnifiedPush
             val showMutedUntilIcon = !showMutedForeverIcon && (subscription.mutedUntil > 1L || globalMutedUntil > 1L) && !isUnifiedPush
+            val colorIdx = Math.abs(subscription.id.hashCode()) % iconGradients.size
+            iconContainerView.setBackgroundResource(iconGradients[colorIdx])
+            iconContainerView.backgroundTintList = null
             if (subscription.icon != null) {
+                imageView.visibility = View.VISIBLE
                 imageView.setImageBitmap(subscription.icon.readBitmapFromUriOrNull(context))
                 androidx.core.widget.ImageViewCompat.setImageTintList(imageView, null)
+                letterView.visibility = View.GONE
             } else {
-                imageView.setImageResource(R.drawable.ic_sms_gray_24dp)
-                val tintColor = com.google.android.material.color.MaterialColors.getColor(
-                    context, com.google.android.material.R.attr.colorOnPrimaryContainer, android.graphics.Color.BLUE
-                )
-                androidx.core.widget.ImageViewCompat.setImageTintList(
-                    imageView,
-                    android.content.res.ColorStateList.valueOf(tintColor)
-                )
+                imageView.visibility = View.GONE
+                letterView.visibility = View.VISIBLE
+                val name = displayName(appBaseUrl, subscription)
+                letterView.text = name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+                letterView.setTextColor(Color.WHITE)
             }
             nameView.text = displayName(appBaseUrl, subscription)
             statusView.text = statusMessage
@@ -138,8 +151,10 @@ class MainAdapter(
             } else {
                 newItemsView.visibility = View.VISIBLE
                 newItemsView.text = if (subscription.newCount <= 99) subscription.newCount.toString() else "99+"
-                newItemsView.setTextColor(onPrimaryColor)
-                newItemsView.background = countDrawable
+                val isMuted = showMutedForeverIcon || showMutedUntilIcon
+                newItemsView.setBackgroundResource(
+                    if (isMuted) R.drawable.bg_badge_muted else R.drawable.bg_badge_gradient
+                )
             }
             itemView.setOnClickListener { onClick(subscription) }
             itemView.setOnLongClickListener { onLongClick(subscription); true }

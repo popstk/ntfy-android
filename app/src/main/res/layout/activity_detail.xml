@@ -37,10 +37,10 @@
                 android:layout_height="match_parent"
                 android:clickable="true"
                 android:focusable="true"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="88dp"
                 android:clipToPadding="false"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="@android:color/transparent"
                 app:layoutManager="LinearLayoutManager"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -48,47 +48,74 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="32dp"
             android:id="@+id/detail_no_notifications"
             app:layout_constraintBottom_toTopOf="@id/detail_message_bar"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
-        <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_sms_gray_48dp"
-                android:id="@+id/detail_no_notifications_image"/>
+
+        <FrameLayout
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/bg_empty_icon"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp">
+            <ImageView
+                    android:id="@+id/detail_no_notifications_image"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:tint="@android:color/white"
+                    app:srcCompat="@drawable/ic_sms_gray_48dp"/>
+        </FrameLayout>
+
         <TextView
                 android:id="@+id/detail_no_notifications_text"
                 android:text="@string/detail_no_notifications_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:padding="10dp" android:gravity="center_horizontal"
-                android:paddingStart="50dp" android:paddingEnd="50dp"/>
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:lineSpacingMultiplier="1.3"/>
         <TextView
                 android:text="@string/detail_how_to_intro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/detail_how_to_intro"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"/>
+                android:layout_marginTop="16dp"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.6"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
         <TextView
                 android:text="@string/detail_how_to_example"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/detail_how_to_example"
-                android:layout_marginTop="7dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"/>
+                android:layout_marginTop="8dp"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
         <TextView
                 android:text="@string/detail_how_to_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/detail_how_to_link"
-                android:layout_marginTop="7dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
+                android:layout_marginTop="8dp"
+                android:textColor="?attr/colorPrimary"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textStyle="bold"
+                android:gravity="center"
                 android:linksClickable="true"
                 android:autoLink="web"/>
     </LinearLayout>

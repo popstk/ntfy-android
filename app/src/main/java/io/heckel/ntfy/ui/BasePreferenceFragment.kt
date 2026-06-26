@@ -1,5 +1,6 @@
 package io.heckel.ntfy.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -18,10 +19,24 @@ import io.heckel.ntfy.R
 abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
-        // Apply window insets to ensure content is not covered by navigation bar
+
+        setDivider(null)
+        setDividerHeight(0)
+
+        view.setBackgroundColor(Color.TRANSPARENT)
         listView?.let { recyclerView ->
+            recyclerView.setBackgroundColor(Color.TRANSPARENT)
             recyclerView.clipToPadding = false
+            val density = resources.displayMetrics.density
+            val dividerColor = Color.argb(15, 0, 0, 0)
+            recyclerView.addItemDecoration(
+                PreferenceGroupCardDecoration(
+                    horizontalMargin = (12 * density).toInt(),
+                    groupBottomMargin = (4 * density).toInt(),
+                    dividerColor = dividerColor,
+                    dividerHeight = density * 0.5f
+                )
+            )
             ViewCompat.setOnApplyWindowInsetsListener(recyclerView) { v, insets ->
                 val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
                 v.updatePadding(bottom = systemBars.bottom)

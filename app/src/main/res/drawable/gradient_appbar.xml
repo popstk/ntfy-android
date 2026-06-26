@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ColorOS 16 AppBar 渐变背景：从左上 #5B8EF0 到右下 #8B5CF6 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:startColor="#5B8EF0"
+        android:endColor="#8B5CF6"
+        android:angle="315"/>
+</shape>

@@ -1,6 +1,7 @@
 package io.heckel.ntfy.ui
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
 import android.net.Uri
@@ -146,42 +147,24 @@ class DetailActivity : AppCompatActivity(), NotificationFragment.NotificationSet
         appBaseUrl = getString(R.string.app_base_url)
 
         val toolbarLayout = findViewById<View>(R.id.app_bar_drawer)
-        val dynamicColors = repository.getDynamicColorsEnabled()
-        val darkMode = isDarkThemeOn(this)
-        val statusBarColor = Colors.statusBarNormal(this, dynamicColors, darkMode)
-        toolbarLayout.setBackgroundColor(statusBarColor)
 
-        // Set collapse icon (back arrow when search is expanded) with proper tint
-        toolbarTextColor = Colors.toolbarTextColor(this, dynamicColors, darkMode)
         val collapseIcon = ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_white_24dp)?.mutate()
-        collapseIcon?.setTint(toolbarTextColor)
+        collapseIcon?.setTint(Color.WHITE)
 
+        toolbarTextColor = Color.WHITE
         toolbar = toolbarLayout.findViewById(R.id.toolbar)
-        toolbar.setTitleTextColor(toolbarTextColor)
-        toolbar.setNavigationIconTint(toolbarTextColor)
-        toolbar.overflowIcon?.setTint(toolbarTextColor)
+        toolbar.setTitleTextColor(Color.WHITE)
+        toolbar.setNavigationIconTint(Color.WHITE)
+        toolbar.overflowIcon?.setTint(Color.WHITE)
         toolbar.collapseIcon = collapseIcon
         setSupportActionBar(toolbar)
-        
-        // Set system status bar appearance
-        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars =
-            Colors.shouldUseLightStatusBar(dynamicColors, darkMode)
 
-        // Set detail activity background: use theme background for dynamic colors, static gray for non-dynamic
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
+
         val detailContentLayout = findViewById<View>(R.id.detail_content_layout)
-        if (repository.getDynamicColorsEnabled()) {
-            detailContentLayout.setBackgroundColor(
-                MaterialColors.getColor(
-                    this,
-                    android.R.attr.colorBackground,
-                    ContextCompat.getColor(this, R.color.detail_activity_background)
-                )
-            )
-        } else {
-            detailContentLayout.setBackgroundColor(
-                ContextCompat.getColor(this, R.color.detail_activity_background)
-            )
-        }
+        detailContentLayout.setBackgroundColor(
+            ContextCompat.getColor(this, R.color.detail_activity_background)
+        )
 
         // Show 'Back' button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

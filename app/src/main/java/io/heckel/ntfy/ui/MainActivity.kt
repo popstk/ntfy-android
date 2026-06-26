@@ -2,6 +2,7 @@ package io.heckel.ntfy.ui
 
 import android.Manifest
 import android.animation.Animator
+import android.graphics.Color
 import android.animation.AnimatorListenerAdapter
 import android.app.AlarmManager
 import android.app.AlertDialog
@@ -158,22 +159,19 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
 
         // Action bar
         val toolbarLayout = findViewById<AppBarLayout>(R.id.app_bar_drawer)
-        val dynamicColors = repository.getDynamicColorsEnabled()
         val darkMode = isDarkThemeOn(this)
-        val statusBarColor = Colors.statusBarNormal(this, dynamicColors, darkMode)
-        val toolbarTextColor = Colors.toolbarTextColor(this, dynamicColors, darkMode)
-        toolbarLayout.setBackgroundColor(statusBarColor)
-        
+        // Always use gradient appbar (set in XML), never override with dynamic color
+
         val toolbar = toolbarLayout.findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
-        toolbar.setTitleTextColor(toolbarTextColor)
-        toolbar.setNavigationIconTint(toolbarTextColor)
-        toolbar.overflowIcon?.setTint(toolbarTextColor)
+        val whiteColor = Color.WHITE
+        toolbar.setTitleTextColor(whiteColor)
+        toolbar.setNavigationIconTint(whiteColor)
+        toolbar.overflowIcon?.setTint(whiteColor)
         setSupportActionBar(toolbar)
         title = getString(R.string.main_action_bar_title)
-        
-        // Set system status bar appearance
-        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars =
-            Colors.shouldUseLightStatusBar(dynamicColors, darkMode)
+
+        // Gradient appbar = dark icons not needed
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
         // Floating action button ("+")
         fab = findViewById(R.id.fab)
@@ -536,9 +534,8 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
         this.menu = menu
         
         // Tint menu icons based on theme
-        val toolbarTextColor = Colors.toolbarTextColor(this, repository.getDynamicColorsEnabled(), isDarkThemeOn(this))
         for (i in 0 until menu.size) {
-            menu[i].icon?.setTint(toolbarTextColor)
+            menu[i].icon?.setTint(Color.WHITE)
         }
         
         showHideNotificationMenuItems()
@@ -551,13 +548,12 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
     private fun updateDarkModeToggleIcon() {
         if (!this::menu.isInitialized) return
         val toggleItem = menu.findItem(R.id.main_menu_dark_mode_toggle) ?: return
-        val tint = Colors.toolbarTextColor(this, repository.getDynamicColorsEnabled(), isDarkThemeOn(this))
         if (isDarkThemeOn(this)) {
             toggleItem.setIcon(R.drawable.ic_light_mode_white_24dp)
         } else {
             toggleItem.setIcon(R.drawable.ic_dark_mode_white_24dp)
         }
-        toggleItem.icon?.setTint(tint)
+        toggleItem.icon?.setTint(Color.WHITE)
     }
 
     private fun checkSubscriptionsMuted(delayMillis: Long = 0L) {
