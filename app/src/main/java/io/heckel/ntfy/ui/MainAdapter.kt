@@ -96,8 +96,12 @@ class MainAdapter(
         fun bind(subscription: Subscription) {
             this.subscription = subscription
             val isUnifiedPush = subscription.upAppId != null
+            val preview = subscription.lastMessage
             var statusMessage = if (isUnifiedPush) {
                 context.getString(R.string.main_item_status_unified_push, subscription.upAppId)
+            } else if (!preview.isNullOrBlank()) {
+                // 优先显示最后一条通知预览（设计稿 S0 .ch-prev）
+                preview
             } else if (subscription.totalCount == 1) {
                 context.getString(R.string.main_item_status_text_one, subscription.totalCount)
             } else {

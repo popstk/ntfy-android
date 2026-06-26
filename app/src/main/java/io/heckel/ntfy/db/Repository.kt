@@ -564,6 +564,7 @@ class Repository(private val sharedPrefs: SharedPreferences, database: Database)
                 totalCount = s.totalCount,
                 newCount = s.newCount,
                 lastActive = s.lastActive,
+                lastMessage = s.lastMessage,
                 connectionDetails = connectionDetails[s.baseUrl] ?: ConnectionDetails()
             )
         }
@@ -591,6 +592,7 @@ class Repository(private val sharedPrefs: SharedPreferences, database: Database)
             totalCount = s.totalCount,
             newCount = s.newCount,
             lastActive = s.lastActive,
+            lastMessage = s.lastMessage,
             connectionDetails = connectionDetails[s.baseUrl] ?: ConnectionDetails()
         )
     }

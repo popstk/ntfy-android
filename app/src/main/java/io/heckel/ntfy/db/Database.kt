@@ -47,6 +47,7 @@ data class Subscription(
     @Ignore val totalCount: Int = 0, // Total notifications
     @Ignore val newCount: Int = 0, // New notifications
     @Ignore val lastActive: Long = 0, // Unix timestamp
+    @Ignore val lastMessage: String? = null, // 最新一条通知的预览文本（首页卡片用）
     @Ignore val connectionDetails: ConnectionDetails = ConnectionDetails()
 ) {
     constructor(
@@ -139,7 +140,8 @@ data class SubscriptionWithMetadata(
     val dedicatedChannels: Boolean,
     val totalCount: Int,
     val newCount: Int,
-    val lastActive: Long
+    val lastActive: Long,
+    val lastMessage: String?
 )
 
 @Entity(primaryKeys = ["id", "subscriptionId"])
@@ -495,7 +497,8 @@ interface SubscriptionDao {
           s.id, s.baseUrl, s.topic, s.instant, s.mutedUntil, s.minPriority, s.autoDelete, s.insistent, s.lastNotificationId, s.icon, s.upAppId, s.upConnectorToken, s.displayName, s.dedicatedChannels,
           COUNT(n.id) totalCount, 
           COUNT(CASE n.notificationId WHEN 0 THEN NULL ELSE n.id END) newCount, 
-          IFNULL(MAX(n.timestamp),0) AS lastActive
+          IFNULL(MAX(n.timestamp),0) AS lastActive,
+          (SELECT CASE WHEN n2.message='' THEN n2.title ELSE n2.message END FROM Notification AS n2 WHERE n2.subscriptionId=s.id AND n2.deleted != 1 ORDER BY n2.timestamp DESC LIMIT 1) AS lastMessage
         FROM Subscription AS s
         LEFT JOIN Notification AS n ON s.id=n.subscriptionId AND n.deleted != 1
         GROUP BY s.id
@@ -508,7 +511,8 @@ interface SubscriptionDao {
           s.id, s.baseUrl, s.topic, s.instant, s.mutedUntil, s.minPriority, s.autoDelete, s.insistent, s.lastNotificationId, s.icon, s.upAppId, s.upConnectorToken, s.displayName, s.dedicatedChannels,
           COUNT(n.id) totalCount, 
           COUNT(CASE n.notificationId WHEN 0 THEN NULL ELSE n.id END) newCount, 
-          IFNULL(MAX(n.timestamp),0) AS lastActive
+          IFNULL(MAX(n.timestamp),0) AS lastActive,
+          (SELECT CASE WHEN n2.message='' THEN n2.title ELSE n2.message END FROM Notification AS n2 WHERE n2.subscriptionId=s.id AND n2.deleted != 1 ORDER BY n2.timestamp DESC LIMIT 1) AS lastMessage
         FROM Subscription AS s
         LEFT JOIN Notification AS n ON s.id=n.subscriptionId AND n.deleted != 1
         GROUP BY s.id
@@ -521,7 +525,8 @@ interface SubscriptionDao {
           s.id, s.baseUrl, s.topic, s.instant, s.mutedUntil, s.minPriority, s.autoDelete, s.insistent, s.lastNotificationId, s.icon, s.upAppId, s.upConnectorToken, s.displayName, s.dedicatedChannels,
           COUNT(n.id) totalCount, 
           COUNT(CASE n.notificationId WHEN 0 THEN NULL ELSE n.id END) newCount, 
-          IFNULL(MAX(n.timestamp),0) AS lastActive
+          IFNULL(MAX(n.timestamp),0) AS lastActive,
+          (SELECT CASE WHEN n2.message='' THEN n2.title ELSE n2.message END FROM Notification AS n2 WHERE n2.subscriptionId=s.id AND n2.deleted != 1 ORDER BY n2.timestamp DESC LIMIT 1) AS lastMessage
         FROM Subscription AS s
         LEFT JOIN Notification AS n ON s.id=n.subscriptionId AND n.deleted != 1
         WHERE s.baseUrl = :baseUrl AND s.topic = :topic
@@ -534,7 +539,8 @@ interface SubscriptionDao {
           s.id, s.baseUrl, s.topic, s.instant, s.mutedUntil, s.minPriority, s.autoDelete, s.insistent, s.lastNotificationId, s.icon, s.upAppId, s.upConnectorToken, s.displayName, s.dedicatedChannels,
           COUNT(n.id) totalCount, 
           COUNT(CASE n.notificationId WHEN 0 THEN NULL ELSE n.id END) newCount, 
-          IFNULL(MAX(n.timestamp),0) AS lastActive
+          IFNULL(MAX(n.timestamp),0) AS lastActive,
+          (SELECT CASE WHEN n2.message='' THEN n2.title ELSE n2.message END FROM Notification AS n2 WHERE n2.subscriptionId=s.id AND n2.deleted != 1 ORDER BY n2.timestamp DESC LIMIT 1) AS lastMessage
         FROM Subscription AS s
         LEFT JOIN Notification AS n ON s.id=n.subscriptionId AND n.deleted != 1
         WHERE s.id = :subscriptionId
@@ -547,7 +553,8 @@ interface SubscriptionDao {
           s.id, s.baseUrl, s.topic, s.instant, s.mutedUntil, s.minPriority, s.autoDelete, s.insistent, s.lastNotificationId, s.icon, s.upAppId, s.upConnectorToken, s.displayName, s.dedicatedChannels,
           COUNT(n.id) totalCount, 
           COUNT(CASE n.notificationId WHEN 0 THEN NULL ELSE n.id END) newCount, 
-          IFNULL(MAX(n.timestamp),0) AS lastActive
+          IFNULL(MAX(n.timestamp),0) AS lastActive,
+          (SELECT CASE WHEN n2.message='' THEN n2.title ELSE n2.message END FROM Notification AS n2 WHERE n2.subscriptionId=s.id AND n2.deleted != 1 ORDER BY n2.timestamp DESC LIMIT 1) AS lastMessage
         FROM Subscription AS s
         LEFT JOIN Notification AS n ON s.id=n.subscriptionId AND n.deleted != 1
         WHERE s.upConnectorToken = :connectorToken
