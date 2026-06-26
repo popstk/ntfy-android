@@ -11,21 +11,32 @@
         android:id="@+id/publish_dialog_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorSurface"
+        android:background="@android:color/transparent"
         app:elevation="0dp"
         app:liftOnScroll="false">
 
-        <com.google.android.material.appbar.MaterialToolbar
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_appbar" />
+
+            <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/publish_dialog_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorSurface"
+            android:background="@android:color/transparent"
             android:paddingStart="0dp"
             android:paddingEnd="12dp"
             app:navigationIcon="@drawable/ic_close_white_24dp"
-            app:navigationIconTint="?attr/colorOnSurface"
-            app:titleTextColor="?attr/colorOnSurface"
+            app:navigationIconTint="@android:color/white"
+            app:titleTextColor="@android:color/white"
             app:menu="@menu/menu_publish_dialog" />
+
+        </FrameLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
