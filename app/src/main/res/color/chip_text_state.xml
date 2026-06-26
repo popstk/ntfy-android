@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 芯片文字/图标着色：选中白，未选灰，匹配设计稿 .pchip / .pchip.on -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@android:color/white" android:state_checked="true"/>
+    <item android:color="@color/chip_text_unchecked"/>
+</selector>

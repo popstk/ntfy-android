@@ -148,7 +148,8 @@
 
     <!-- Chip colors -->
     <color name="chip_background_color">#DEE3EC</color>
-    <color name="chip_background_checked">#C2C7CF</color>
+    <color name="chip_background_checked">#5B8EF0</color> <!-- 选中态蓝填充，匹配设计稿 .pchip.on -->
+    <color name="chip_text_unchecked">#5A6473</color>
 
     <!-- Remove black status bar in Action mode: https://stackoverflow.com/a/79456725 -->
     <color name="abc_decor_view_status_guard" tools:override="true">@android:color/transparent</color>

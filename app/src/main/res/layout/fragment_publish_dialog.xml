@@ -312,8 +312,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/publish_dialog_chip_markdown"
+                        app:chipIcon="@drawable/ic_chip_markdown"
                         app:chipBackgroundColor="@color/chip_background_state"
-                        app:chipStrokeWidth="0dp"/>
+                        app:chipStrokeWidth="0dp"
+                        android:textColor="@color/chip_text_state"
+                        app:chipIconTint="@color/chip_text_state"
+                        app:chipIconVisible="true"
+                        app:chipIconSize="18dp"
+                        app:checkedIconVisible="false"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/publish_dialog_chip_title"
@@ -321,8 +327,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/publish_dialog_chip_title"
+                        app:chipIcon="@drawable/ic_chip_title"
                         app:chipBackgroundColor="@color/chip_background_state"
-                        app:chipStrokeWidth="0dp"/>
+                        app:chipStrokeWidth="0dp"
+                        android:textColor="@color/chip_text_state"
+                        app:chipIconTint="@color/chip_text_state"
+                        app:chipIconVisible="true"
+                        app:chipIconSize="18dp"
+                        app:checkedIconVisible="false"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/publish_dialog_chip_tags"
@@ -330,8 +342,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/publish_dialog_chip_tags"
+                        app:chipIcon="@drawable/ic_chip_tags"
                         app:chipBackgroundColor="@color/chip_background_state"
-                        app:chipStrokeWidth="0dp"/>
+                        app:chipStrokeWidth="0dp"
+                        android:textColor="@color/chip_text_state"
+                        app:chipIconTint="@color/chip_text_state"
+                        app:chipIconVisible="true"
+                        app:chipIconSize="18dp"
+                        app:checkedIconVisible="false"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/publish_dialog_chip_priority"
@@ -339,8 +357,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/publish_dialog_chip_priority"
+                        app:chipIcon="@drawable/ic_chip_priority"
                         app:chipBackgroundColor="@color/chip_background_state"
-                        app:chipStrokeWidth="0dp"/>
+                        app:chipStrokeWidth="0dp"
+                        android:textColor="@color/chip_text_state"
+                        app:chipIconTint="@color/chip_text_state"
+                        app:chipIconVisible="true"
+                        app:chipIconSize="18dp"
+                        app:checkedIconVisible="false"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/publish_dialog_chip_click_url"
@@ -348,8 +372,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/publish_dialog_chip_click_url"
+                        app:chipIcon="@drawable/ic_chip_click_url"
                         app:chipBackgroundColor="@color/chip_background_state"
-                        app:chipStrokeWidth="0dp"/>
+                        app:chipStrokeWidth="0dp"
+                        android:textColor="@color/chip_text_state"
+                        app:chipIconTint="@color/chip_text_state"
+                        app:chipIconVisible="true"
+                        app:chipIconSize="18dp"
+                        app:checkedIconVisible="false"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/publish_dialog_chip_email"
@@ -357,8 +387,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/publish_dialog_chip_email"
+                        app:chipIcon="@drawable/ic_chip_email"
                         app:chipBackgroundColor="@color/chip_background_state"
-                        app:chipStrokeWidth="0dp"/>
+                        app:chipStrokeWidth="0dp"
+                        android:textColor="@color/chip_text_state"
+                        app:chipIconTint="@color/chip_text_state"
+                        app:chipIconVisible="true"
+                        app:chipIconSize="18dp"
+                        app:checkedIconVisible="false"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/publish_dialog_chip_delay"
@@ -366,8 +402,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/publish_dialog_chip_delay"
+                        app:chipIcon="@drawable/ic_chip_delay"
                         app:chipBackgroundColor="@color/chip_background_state"
-                        app:chipStrokeWidth="0dp"/>
+                        app:chipStrokeWidth="0dp"
+                        android:textColor="@color/chip_text_state"
+                        app:chipIconTint="@color/chip_text_state"
+                        app:chipIconVisible="true"
+                        app:chipIconSize="18dp"
+                        app:checkedIconVisible="false"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/publish_dialog_chip_attach_url"
@@ -375,8 +417,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/publish_dialog_chip_attach_url"
+                        app:chipIcon="@drawable/ic_chip_attach_url"
                         app:chipBackgroundColor="@color/chip_background_state"
-                        app:chipStrokeWidth="0dp"/>
+                        app:chipStrokeWidth="0dp"
+                        android:textColor="@color/chip_text_state"
+                        app:chipIconTint="@color/chip_text_state"
+                        app:chipIconVisible="true"
+                        app:chipIconSize="18dp"
+                        app:checkedIconVisible="false"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/publish_dialog_chip_attach_file"
@@ -384,8 +432,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/publish_dialog_chip_attach_file"
+                        app:chipIcon="@drawable/ic_chip_attach_file"
                         app:chipBackgroundColor="@color/chip_background_state"
-                        app:chipStrokeWidth="0dp"/>
+                        app:chipStrokeWidth="0dp"
+                        android:textColor="@color/chip_text_state"
+                        app:chipIconTint="@color/chip_text_state"
+                        app:chipIconVisible="true"
+                        app:chipIconSize="18dp"
+                        app:checkedIconVisible="false"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/publish_dialog_chip_phone_call"
@@ -393,8 +447,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/publish_dialog_chip_phone_call"
+                        app:chipIcon="@drawable/ic_chip_phone"
                         app:chipBackgroundColor="@color/chip_background_state"
-                        app:chipStrokeWidth="0dp"/>
+                        app:chipStrokeWidth="0dp"
+                        android:textColor="@color/chip_text_state"
+                        app:chipIconTint="@color/chip_text_state"
+                        app:chipIconVisible="true"
+                        app:chipIconSize="18dp"
+                        app:checkedIconVisible="false"/>
 
                 </com.google.android.material.chip.ChipGroup>
 
