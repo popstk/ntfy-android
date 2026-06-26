@@ -2,10 +2,10 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <gradient android:startColor="#26C6DA" android:endColor="#00838F" android:angle="135" android:type="linear"/>
+            <gradient android:startColor="#FF7043" android:endColor="#D84315" android:angle="135" android:type="linear"/>
             <corners android:radius="10dp"/>
         </shape>
     </item>
     <item android:top="7dp" android:bottom="7dp" android:left="7dp" android:right="7dp"
-        android:drawable="@drawable/ic_pref_code" android:tint="#FFFFFF"/>
+        android:drawable="@drawable/ic_pref_broadcast" android:tint="#FFFFFF"/>
 </layer-list>

@@ -105,19 +105,19 @@
                 app:title="@string/settings_advanced_connection_alert_title"
                 app:entries="@array/settings_advanced_connection_alert_entries"
                 app:entryValues="@array/settings_advanced_connection_alert_values"
-                app:icon="@drawable/ic_pref_tune_colored"
+                app:icon="@drawable/ic_pref_alert_colored"
                 app:defaultValue="0"/>
         <ListPreference
                 app:key="@string/settings_advanced_connection_protocol_key"
                 app:title="@string/settings_advanced_connection_protocol_title"
                 app:entries="@array/settings_advanced_connection_protocol_entries"
                 app:entryValues="@array/settings_advanced_connection_protocol_values"
-                app:icon="@drawable/ic_pref_tune_colored"
+                app:icon="@drawable/ic_pref_protocol_colored"
                 app:defaultValue="jsonhttp"/>
         <Preference
             app:key="@string/settings_advanced_exact_alarms_key"
             app:title="@string/settings_advanced_exact_alarms_title"
-            app:icon="@drawable/ic_pref_tune_colored"/>
+            app:icon="@drawable/ic_pref_alert_colored"/>
         <Preference
             app:key="@string/settings_advanced_custom_headers_key"
             app:title="@string/settings_advanced_custom_headers_title"
@@ -128,22 +128,22 @@
             app:key="@string/settings_advanced_certificates_key"
             app:title="@string/settings_advanced_certificates_title"
             app:summary="@string/settings_advanced_certificates_summary"
-            app:icon="@drawable/ic_pref_tune_colored"
+            app:icon="@drawable/ic_pref_cert_colored"
             app:fragment="io.heckel.ntfy.ui.CertificateSettingsFragment"/>
         <SwitchPreferenceCompat
             app:key="@string/settings_advanced_broadcast_key"
             app:title="@string/settings_advanced_broadcast_title"
-            app:icon="@drawable/ic_pref_tune_colored"
+            app:icon="@drawable/ic_pref_broadcast_colored"
             app:enabled="true"/>
         <SwitchPreferenceCompat
             app:key="@string/settings_advanced_unifiedpush_key"
             app:title="@string/settings_advanced_unifiedpush_title"
-            app:icon="@drawable/ic_pref_tune_colored"
+            app:icon="@drawable/ic_pref_unifiedpush_colored"
             app:enabled="true"/>
         <SwitchPreferenceCompat
                 app:key="@string/settings_advanced_record_logs_key"
                 app:title="@string/settings_advanced_record_logs_title"
-                app:icon="@drawable/ic_pref_tune_colored"
+                app:icon="@drawable/ic_pref_logs_colored"
                 app:enabled="true"/>
         <ListPreference
                 app:key="@string/settings_advanced_export_logs_key"
@@ -151,7 +151,7 @@
                 app:summary="@string/settings_advanced_export_logs_summary"
                 app:entries="@array/settings_advanced_export_logs_entries"
                 app:entryValues="@array/settings_advanced_export_logs_values"
-                app:icon="@drawable/ic_pref_tune_colored"
+                app:icon="@drawable/ic_pref_logs_colored"
                 app:defaultValue="copy"/>
         <Preference
                 app:key="@string/settings_advanced_clear_logs_key"
