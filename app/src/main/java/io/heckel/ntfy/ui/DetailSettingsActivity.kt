@@ -88,6 +88,16 @@ class DetailSettingsActivity : AppCompatActivity() {
         val displayName = intent.getStringExtra(DetailActivity.EXTRA_SUBSCRIPTION_DISPLAY_NAME) ?: return
         title = displayName
 
+        // 把 hero 头部从「应用」改绑为「当前话题」——修复复用 activity_settings 时
+        // 残留显示 ntfy / v0.0.0 占位的问题（匹配设计稿 S3 话题专属 hero）
+        val subBaseUrl = intent.getStringExtra(DetailActivity.EXTRA_SUBSCRIPTION_BASE_URL)
+        val subTopic = intent.getStringExtra(DetailActivity.EXTRA_SUBSCRIPTION_TOPIC)
+        findViewById<android.widget.TextView>(R.id.settings_header_name)?.text = displayName
+        if (subBaseUrl != null && subTopic != null) {
+            findViewById<android.widget.TextView>(R.id.settings_header_server)?.text = topicShortUrl(subBaseUrl, subTopic)
+        }
+        findViewById<android.widget.TextView>(R.id.settings_header_version)?.visibility = android.view.View.GONE
+
         // Show 'Back' button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
