@@ -177,4 +177,5 @@
 
     <!-- Tag chip color -->
     <color name="tag_text_color">#5B8EF0</color>
+    <color name="tag_pill_background">#1A5B8EF0</color>
 </resources>

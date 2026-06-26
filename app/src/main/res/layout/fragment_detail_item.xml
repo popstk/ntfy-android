@@ -36,16 +36,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
+        <!-- 优先级圆点（颜色由代码按优先级设置，匹配设计稿 .prio-pip） -->
+        <View
+            android:id="@+id/detail_item_priority_pip"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/ic_circle"
+            app:layout_constraintBottom_toBottomOf="@id/detail_item_date_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/detail_item_date_text"/>
+
         <!-- 时间 -->
         <TextView
             android:id="@+id/detail_item_date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurfaceVariant"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/detail_item_priority_pip"
             app:layout_constraintTop_toBottomOf="@id/detail_item_priority_bar"
             tools:text="10:43"/>
 
@@ -155,14 +166,19 @@
             app:shapeAppearanceOverlay="@style/roundedCornersImageView"
             app:srcCompat="@drawable/ic_cancel_gray_24dp"/>
 
-        <!-- 标签文字 -->
+        <!-- 标签胶囊（浅蓝底 + 蓝字，匹配设计稿 .tag） -->
         <TextView
             android:id="@+id/detail_item_tags_text"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="7dp"
             android:layout_marginEnd="6dp"
+            android:background="@drawable/bg_tag_pill"
+            android:paddingStart="11dp"
+            android:paddingEnd="11dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="@color/tag_text_color"
             android:textStyle="bold"
