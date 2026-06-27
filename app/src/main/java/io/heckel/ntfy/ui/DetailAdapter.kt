@@ -101,7 +101,7 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
         private val messageView: TextView = itemView.findViewById(R.id.detail_item_message_text)
         private val iconView: ImageView = itemView.findViewById(R.id.detail_item_icon)
         private val newDotImageView: View = itemView.findViewById(R.id.detail_item_new_dot)
-        private val tagsView: TextView = itemView.findViewById(R.id.detail_item_tags_text)
+        private val tagsGroup: com.google.android.material.chip.ChipGroup = itemView.findViewById(R.id.detail_item_tags_group)
         private val menuButton: ImageButton = itemView.findViewById(R.id.detail_item_menu_button)
         private val attachmentImageView: ImageView = itemView.findViewById(R.id.detail_item_attachment_image)
         private val attachmentBoxView: View = itemView.findViewById(R.id.detail_item_attachment_file_box)
@@ -146,12 +146,13 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
             } else {
                 titleView.visibility = View.GONE
             }
+            tagsGroup.removeAllViews()
             if (unmatchedTags.isNotEmpty()) {
-                tagsView.visibility = View.VISIBLE
-                // 井号胶囊样式，匹配设计稿 .tag（如 #alert #critical）
-                tagsView.text = unmatchedTags.joinToString(" ") { "#$it" }
+                tagsGroup.visibility = View.VISIBLE
+                // 每个标签一个独立井号胶囊，匹配设计稿 .tag-row（#alert #critical）
+                unmatchedTags.forEach { tag -> tagsGroup.addView(makeTagPill(context, "#$tag")) }
             } else {
-                tagsView.visibility = View.GONE
+                tagsGroup.visibility = View.GONE
             }
             if (selected.contains(notification.id)) {
                 cardView.setCardBackgroundColor(Colors.cardSelectedBackgroundColor(context))
@@ -189,6 +190,22 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
             priorityPipView.backgroundTintList = android.content.res.ColorStateList.valueOf(barColor)
             // 箭头图标在新设计中冗余（颜色已表达优先级），统一隐藏
             priorityImageView.visibility = View.GONE
+        }
+
+        // 生成单个标签胶囊（浅蓝底 + 蓝粗字），匹配设计稿 .tag
+        private fun makeTagPill(context: Context, text: String): TextView {
+            val tv = TextView(context)
+            tv.text = text
+            tv.setBackgroundResource(R.drawable.bg_tag_pill)
+            tv.setTextColor(ContextCompat.getColor(context, R.color.tag_text_color))
+            tv.setTypeface(tv.typeface, android.graphics.Typeface.BOLD)
+            tv.textSize = 12f
+            tv.includeFontPadding = false
+            val d = context.resources.displayMetrics.density
+            val padH = (11 * d).toInt()
+            val padV = (4 * d).toInt()
+            tv.setPadding(padH, padV, padH, padV)
+            return tv
         }
 
         private fun maybeRenderAttachment(context: Context, notification: Notification, attachmentFileStat: FileInfo?) {

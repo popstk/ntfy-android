@@ -158,35 +158,29 @@
             android:maxHeight="160dp"
             android:scaleType="centerCrop"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/detail_item_tags_text"
+            app:layout_constraintBottom_toTopOf="@id/detail_item_tags_group"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_item_message_text"
             app:shapeAppearanceOverlay="@style/roundedCornersImageView"
             app:srcCompat="@drawable/ic_cancel_gray_24dp"/>
 
-        <!-- 标签胶囊（浅蓝底 + 蓝字，匹配设计稿 .tag） -->
-        <TextView
-            android:id="@+id/detail_item_tags_text"
-            android:layout_width="wrap_content"
+        <!-- 标签胶囊组：每个标签一个独立浅蓝胶囊，可换行（匹配设计稿 .tag-row .tag） -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/detail_item_tags_group"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="7dp"
             android:layout_marginEnd="6dp"
-            android:background="@drawable/bg_tag_pill"
-            android:paddingStart="11dp"
-            android:paddingEnd="11dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
-            android:textColor="@color/tag_text_color"
-            android:textStyle="bold"
+            app:chipSpacingHorizontal="6dp"
+            app:chipSpacingVertical="4dp"
+            app:singleLine="false"
             app:layout_constraintBottom_toTopOf="@id/detail_item_attachment_file_box"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_item_attachment_image"
-            tools:text="#ssh, #zfs"/>
+            app:layout_constraintTop_toBottomOf="@id/detail_item_attachment_image"/>
 
         <!-- 文件附件 box -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -204,7 +198,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_item_tags_text">
+            app:layout_constraintTop_toBottomOf="@id/detail_item_tags_group">
 
             <ImageView
                 android:id="@+id/detail_item_attachment_file_icon"
