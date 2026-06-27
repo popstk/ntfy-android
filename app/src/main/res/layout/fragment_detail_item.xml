@@ -14,6 +14,18 @@
     app:cardElevation="2dp"
     app:strokeWidth="0dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 优先级横条：卡片顶部整条满宽，颜色由代码设置（匹配设计稿 .nc-pbar） -->
+        <View
+            android:id="@+id/detail_item_priority_bar"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/bg_priority_bar"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detail_item_layout"
         android:layout_width="match_parent"
@@ -22,19 +34,6 @@
         android:focusable="true"
         android:paddingBottom="10dp"
         android:paddingEnd="10dp">
-
-        <!-- 优先级横条（顶部，颜色由代码设置） -->
-        <View
-            android:id="@+id/detail_item_priority_bar"
-            android:layout_width="0dp"
-            android:layout_height="3dp"
-            android:background="@drawable/bg_priority_bar"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
 
         <!-- 优先级圆点（颜色由代码按优先级设置，匹配设计稿 .prio-pip） -->
         <View
@@ -53,11 +52,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurfaceVariant"
             app:layout_constraintStart_toEndOf="@id/detail_item_priority_pip"
-            app:layout_constraintTop_toBottomOf="@id/detail_item_priority_bar"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="10:43"/>
 
         <!-- 优先级图标（保留向后兼容） -->
@@ -121,7 +120,7 @@
             android:layout_marginTop="3dp"
             android:layout_marginEnd="6dp"
             android:autoLink="web"
-            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/detail_item_icon"
@@ -289,4 +288,6 @@
             app:layout_constraintGuide_begin="27dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <corners android:radius="2dp"/>
-    <solid android:color="@android:color/transparent"/>
+    <!-- 实心白底，便于代码用 backgroundTint 按优先级着色（透明底会被 SRC_IN tint 吃成透明） -->
+    <solid android:color="#FFFFFF"/>
 </shape>
