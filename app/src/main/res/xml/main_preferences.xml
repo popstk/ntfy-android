@@ -57,7 +57,7 @@
         <ListPreference
                 app:key="@string/settings_general_language_key"
                 app:title="@string/settings_general_language_title"
-                app:icon="@drawable/ic_pref_cloud_colored"/>
+                app:icon="@drawable/ic_pref_language_colored"/>
     </PreferenceCategory>
     <PreferenceCategory
             app:title="@string/settings_appearance_header"
