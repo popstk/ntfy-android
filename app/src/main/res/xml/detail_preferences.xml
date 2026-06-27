@@ -6,6 +6,7 @@
         <SwitchPreferenceCompat
                 app:key="@string/detail_settings_notifications_instant_key"
                 app:title="@string/detail_settings_notifications_instant_title"
+                app:icon="@drawable/ic_pref_priority_colored"
                 app:isPreferenceVisible="false"/>
         <ListPreference
                 app:key="@string/detail_settings_notifications_muted_until_key"
@@ -13,6 +14,7 @@
                 app:entries="@array/settings_notifications_muted_until_entries"
                 app:entryValues="@array/settings_notifications_muted_until_values"
                 app:defaultValue="0"
+                app:icon="@drawable/ic_pref_mute_colored"
                 app:isPreferenceVisible="false"/>
         <ListPreference
                 app:key="@string/detail_settings_notifications_min_priority_key"
@@ -20,6 +22,7 @@
                 app:entries="@array/detail_settings_notifications_min_priority_entries"
                 app:entryValues="@array/detail_settings_notifications_min_priority_values"
                 app:defaultValue="0"
+                app:icon="@drawable/ic_pref_priority_colored"
                 app:isPreferenceVisible="false"/> <!-- Same as Repository.MIN_PRIORITY_USE_GLOBAL -->
         <ListPreference
                 app:key="@string/detail_settings_notifications_auto_delete_key"
@@ -27,6 +30,7 @@
                 app:entries="@array/detail_settings_notifications_auto_delete_entries"
                 app:entryValues="@array/detail_settings_notifications_auto_delete_values"
                 app:defaultValue="-1"
+                app:icon="@drawable/ic_pref_delete_colored"
                 app:isPreferenceVisible="false"/> <!-- Same as Repository.AUTO_DELETE_USE_GLOBAL -->
         <ListPreference
                 app:key="@string/detail_settings_notifications_insistent_max_priority_key"
@@ -34,15 +38,18 @@
                 app:entries="@array/detail_settings_notifications_insistent_max_priority_entries"
                 app:entryValues="@array/detail_settings_notifications_insistent_max_priority_values"
                 app:defaultValue="-1"
+                app:icon="@drawable/ic_pref_vibrate_colored"
                 app:isPreferenceVisible="false"/> <!-- Same as Repository.INSISTENT_MAX_PRIORITY_USE_GLOBAL -->
         <SwitchPreferenceCompat
                 app:key="@string/detail_settings_notifications_dedicated_channels_key"
                 app:title="@string/detail_settings_notifications_dedicated_channels_title"
+                app:icon="@drawable/ic_pref_channels_colored"
                 app:isPreferenceVisible="false"/>
         <Preference
                 app:key="@string/detail_settings_notifications_open_channels_key"
                 app:title="@string/detail_settings_notifications_open_channels_title"
                 app:summary="@string/detail_settings_notifications_open_channels_summary"
+                app:icon="@drawable/ic_pref_channel_colored"
                 app:isPreferenceVisible="false"/>
     </PreferenceCategory>
     <PreferenceCategory
@@ -52,17 +59,20 @@
                 app:key="@string/detail_settings_appearance_icon_set_key"
                 app:title="@string/detail_settings_appearance_icon_set_title"
                 app:summary="@string/detail_settings_appearance_icon_set_summary"
+                app:icon="@drawable/ic_pref_image_colored"
                 app:isPreferenceVisible="false"/>
         <Preference
                 app:key="@string/detail_settings_appearance_icon_remove_key"
                 app:title="@string/detail_settings_appearance_icon_remove_title"
                 app:summary="@string/detail_settings_appearance_icon_remove_summary"
+                app:icon="@drawable/ic_pref_remove_colored"
                 app:isPreferenceVisible="false"/>
         <EditTextPreference
                 app:key="@string/detail_settings_appearance_display_name_key"
                 app:title="@string/detail_settings_appearance_display_name_title"
                 app:dialogLayout="@layout/preference_dialog_edittext_edited"
                 app:dialogMessage="@string/detail_settings_appearance_display_name_message"
+                app:icon="@drawable/ic_pref_edit_colored"
                 app:isPreferenceVisible="false"/>
     </PreferenceCategory>
     <PreferenceCategory
@@ -70,6 +80,7 @@
         app:title="@string/detail_settings_about_header">
         <Preference
             app:key="@string/detail_settings_about_topic_url_key"
-            app:title="@string/detail_settings_about_topic_url_title"/>
+            app:title="@string/detail_settings_about_topic_url_title"
+            app:icon="@drawable/ic_pref_link_colored"/>
     </PreferenceCategory>
 </PreferenceScreen>
