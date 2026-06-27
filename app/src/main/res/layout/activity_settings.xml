@@ -12,27 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
+    <!-- Preference Fragment 容器（已去掉顶部固定 hero 信息头） -->
+    <FrameLayout
+        android:id="@+id/settings_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <!-- 信息头：服务器 + 版本 -->
-        <include
-            android:id="@+id/settings_header"
-            layout="@layout/settings_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <!-- Preference Fragment 容器 -->
-        <FrameLayout
-            android:id="@+id/settings_layout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/detail_activity_background"/>
-
-    </LinearLayout>
+        android:background="@color/detail_activity_background"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
