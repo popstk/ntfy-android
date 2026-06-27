@@ -75,6 +75,9 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPrefere
         toolbar?.setTitleTextColor(android.graphics.Color.WHITE)
         toolbar?.setNavigationIconTint(android.graphics.Color.WHITE)
         toolbar?.overflowIcon?.setTint(android.graphics.Color.WHITE)
+        // 标题居中加粗，匹配设计稿设置页顶栏
+        toolbar?.isTitleCentered = true
+        toolbar?.setTitleTextAppearance(this, R.style.ToolbarTitleCentered)
         if (toolbar != null) setSupportActionBar(toolbar)
 
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false

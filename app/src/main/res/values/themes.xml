@@ -164,6 +164,12 @@
         <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
 
+    <!-- 设置页顶栏标题：居中加粗白字，匹配设计稿 -->
+    <style name="ToolbarTitleCentered" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <!-- 对话框字段上方的小号大写标签，匹配设计稿 .fg-lbl -->
     <style name="App.FieldLabel" parent="TextAppearance.Material3.LabelMedium">
         <item name="android:textColor">?android:attr/textColorSecondary</item>

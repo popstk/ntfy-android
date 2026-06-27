@@ -78,6 +78,9 @@ class DetailSettingsActivity : AppCompatActivity() {
         toolbar.setTitleTextColor(toolbarTextColor)
         toolbar.setNavigationIconTint(toolbarTextColor)
         toolbar.overflowIcon?.setTint(toolbarTextColor)
+        // 标题居中加粗，匹配设计稿
+        toolbar.isTitleCentered = true
+        toolbar.setTitleTextAppearance(this, R.style.ToolbarTitleCentered)
         setSupportActionBar(toolbar)
         
         // Set system status bar appearance
