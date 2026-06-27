@@ -45,6 +45,7 @@ class AddFragment : DialogFragment(), TrustedCertificateFragment.TrustedCertific
     // Subscribe page
     private lateinit var subscribeTopicText: TextInputEditText
     private lateinit var subscribeBaseUrlLayout: TextInputLayout
+    private lateinit var subscribeBaseUrlLabel: TextView
     private lateinit var subscribeBaseUrlText: AutoCompleteTextView
     private lateinit var subscribeUseAnotherServerCheckbox: CheckBox
     private lateinit var subscribeUseAnotherServerDescription: TextView
@@ -110,6 +111,7 @@ class AddFragment : DialogFragment(), TrustedCertificateFragment.TrustedCertific
         // Fields for "subscribe page"
         subscribeTopicText = view.findViewById(R.id.add_dialog_subscribe_topic_text)
         subscribeBaseUrlLayout = view.findViewById(R.id.add_dialog_subscribe_base_url_layout)
+        subscribeBaseUrlLabel = view.findViewById(R.id.add_dialog_subscribe_base_url_label)
         subscribeBaseUrlLayout.background = view.background
         subscribeBaseUrlLayout.makeEndIconSmaller(resources) // Hack!
         subscribeBaseUrlText = view.findViewById(R.id.add_dialog_subscribe_base_url_text)
@@ -376,9 +378,11 @@ class AddFragment : DialogFragment(), TrustedCertificateFragment.TrustedCertific
         }
         if (subscribeUseAnotherServerCheckbox.isChecked) {
             subscribeUseAnotherServerDescription.visibility = View.VISIBLE
+            subscribeBaseUrlLabel.visibility = View.VISIBLE
             subscribeBaseUrlLayout.visibility = View.VISIBLE
         } else {
             subscribeUseAnotherServerDescription.visibility = View.GONE
+            subscribeBaseUrlLabel.visibility = View.GONE
             subscribeBaseUrlLayout.visibility = View.GONE
         }
         if (instantToggleAllowed) {

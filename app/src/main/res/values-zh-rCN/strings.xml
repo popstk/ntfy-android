@@ -53,6 +53,7 @@
     <string name="add_dialog_title">订阅主题</string>
     <string name="add_dialog_description_below">主题未必有密码保护，因此请选择难以猜测的名称。订阅之后，您可以通知 PUT/POST 请求发送通知。</string>
     <string name="add_dialog_topic_name_hint">主题名称，例如：phils_alerts</string>
+    <string name="add_dialog_topic_name_label">话题名称</string>
     <string name="detail_how_to_link">详细的说明请见 ntfy.sh 和帮助文档。</string>
     <string name="detail_clear_dialog_message">您确认要删除这个主题下的所有通知吗？</string>
     <string name="detail_test_message">这是 ntfy 安卓应用发来的测试通知。此通知优先级为 %1$d。如果再发送一条通知，通知的样式可能有变化。</string>

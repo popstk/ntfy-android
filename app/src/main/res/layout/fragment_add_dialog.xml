@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:background="@color/md_theme_background"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -82,20 +82,32 @@
                     android:layout_marginTop="16dp"
                     android:visibility="gone"/>
 
+                <TextView
+                    android:id="@+id/add_dialog_subscribe_topic_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="7dp"
+                    android:text="@string/add_dialog_topic_name_label"
+                    android:textAppearance="@style/App.FieldLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/add_dialog_subscribe_description"/>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/add_dialog_subscribe_topic_layout"
+                    style="@style/Widget.App.Field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/add_dialog_subscribe_description"
+                    app:placeholderText="@string/add_dialog_topic_name_hint"
+                    app:layout_constraintTop_toBottomOf="@id/add_dialog_subscribe_topic_label"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="10dp">
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/add_dialog_subscribe_topic_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/add_dialog_topic_name_hint"
                         android:importantForAutofill="no"
                         android:maxLines="1"
                         android:inputType="text"
@@ -128,37 +140,36 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/add_dialog_subscribe_use_another_server_checkbox" />
 
+                <TextView
+                    android:id="@+id/add_dialog_subscribe_base_url_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="7dp"
+                    android:text="@string/common_service_url"
+                    android:textAppearance="@style/App.FieldLabel"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/add_dialog_subscribe_use_another_server_description"/>
+
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                    style="@style/Widget.App.Field.Dropdown"
                     android:id="@+id/add_dialog_subscribe_base_url_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="0dp"
-                    android:padding="0dp"
                     android:visibility="gone"
-                    app:endIconMode="custom"
-                    app:hintEnabled="false"
-                    app:boxBackgroundColor="@null"
+                    app:placeholderText="@string/app_base_url"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/add_dialog_subscribe_use_another_server_description">
+                    app:layout_constraintTop_toBottomOf="@id/add_dialog_subscribe_base_url_label">
 
                     <AutoCompleteTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/add_dialog_subscribe_base_url_text"
-                        android:hint="@string/app_base_url"
                         android:maxLines="1"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="10dp"
-                        android:inputType="textNoSuggestions"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="0dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+                        android:inputType="textNoSuggestions"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -279,20 +290,32 @@
                     android:layout_marginTop="16dp"
                     android:visibility="gone"/>
 
+                <TextView
+                    android:id="@+id/add_dialog_login_username_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="7dp"
+                    android:text="@string/add_dialog_login_username_hint"
+                    android:textAppearance="@style/App.FieldLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/add_dialog_login_description"/>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/add_dialog_login_username_layout"
+                    style="@style/Widget.App.Field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/add_dialog_login_description"
+                    app:placeholderText="@string/add_dialog_login_username_hint"
+                    app:layout_constraintTop_toBottomOf="@+id/add_dialog_login_username_label"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="10dp">
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/add_dialog_login_username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/add_dialog_login_username_hint"
                         android:importantForAutofill="no"
                         android:maxLines="1"
                         android:inputType="text"
@@ -300,20 +323,33 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/add_dialog_login_password_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="7dp"
+                    android:text="@string/add_dialog_login_password_hint"
+                    android:textAppearance="@style/App.FieldLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/add_dialog_login_username_layout"/>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/add_dialog_login_password_layout"
+                    style="@style/Widget.App.Field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/add_dialog_login_username_layout"
+                    app:placeholderText="@string/add_dialog_login_password_hint"
+                    app:endIconMode="password_toggle"
+                    app:layout_constraintTop_toBottomOf="@id/add_dialog_login_password_label"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="10dp">
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/add_dialog_login_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/add_dialog_login_password_hint"
                         android:importantForAutofill="no"
                         android:maxLines="1"
                         android:inputType="textPassword"/>

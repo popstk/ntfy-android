@@ -65,6 +65,7 @@
     <string name="main_item_status_reconnecting">重新連線中…</string>
     <string name="main_menu_notifications_disabled_until">通知暫停至 %1$s</string>
     <string name="add_dialog_topic_name_hint">主題名稱（例如：phils_alerts）</string>
+    <string name="add_dialog_topic_name_label">話題名稱</string>
     <string name="add_dialog_button_cancel">取消</string>
     <string name="add_dialog_button_subscribe">訂閱</string>
     <string name="add_dialog_button_back">上一頁</string>

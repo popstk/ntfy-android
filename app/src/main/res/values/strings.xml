@@ -128,6 +128,7 @@
         Once subscribed, you can PUT/POST notifications.
     </string>
     <string name="add_dialog_topic_name_hint">Topic name, e.g. phils_alerts</string>
+    <string name="add_dialog_topic_name_label">Topic name</string>
     <string name="add_dialog_use_another_server">Use another server</string>
     <string name="add_dialog_use_another_server_description">Enter service URLs below to subscribe to topics from other servers.</string>
     <string name="add_dialog_instant_delivery">Instant delivery in doze mode</string>
