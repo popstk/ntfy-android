@@ -13,6 +13,6 @@
     <item
         android:top="7dp" android:bottom="7dp"
         android:left="7dp" android:right="7dp"
-        android:drawable="@drawable/ic_delete_white_20dp"
+        android:drawable="@drawable/ic_pref_delete_white"
         android:tint="#FFFFFF"/>
 </layer-list>
