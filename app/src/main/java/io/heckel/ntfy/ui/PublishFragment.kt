@@ -58,7 +58,7 @@ class PublishFragment : DialogFragment() {
     private lateinit var titleText: TextInputEditText
     private lateinit var messageText: TextInputEditText
     private lateinit var tagsText: TextInputEditText
-    private lateinit var priorityDropdown: AutoCompleteTextView
+    private lateinit var priorityGroup: ChipGroup
 
     // Chips
     private lateinit var chipGroup: ChipGroup
@@ -196,7 +196,7 @@ class PublishFragment : DialogFragment() {
         titleText = view.findViewById(R.id.publish_dialog_title_text)
         messageText = view.findViewById(R.id.publish_dialog_message_text)
         tagsText = view.findViewById(R.id.publish_dialog_tags_text)
-        priorityDropdown = view.findViewById(R.id.publish_dialog_priority_dropdown)
+        priorityGroup = view.findViewById(R.id.publish_dialog_priority_group)
         uploadProgress = view.findViewById(R.id.publish_dialog_upload_progress)
         uploadProgressText = view.findViewById(R.id.publish_dialog_upload_progress_text)
         errorText = view.findViewById(R.id.publish_dialog_error_text)
@@ -211,16 +211,16 @@ class PublishFragment : DialogFragment() {
             messageText.setSelection(initialMessage.length)
         }
 
-        // Setup priority dropdown with custom adapter
-        val priorityItems = PriorityAdapter.createPriorityItems(requireContext())
-        val priorityAdapter = PriorityAdapter(requireContext(), priorityItems)
-        priorityDropdown.setAdapter(priorityAdapter)
-        priorityDropdown.setText(priorityItems[2].label, false) // Set default priority (index 2 -> priority 3)
-        updatePriorityIcon(priorityItems[2].iconResId)
-        priorityDropdown.setOnItemClickListener { _, _, position, _ ->
-            selectedPriority = priorityItems[position].priority
-            priorityDropdown.setText(priorityItems[position].label, false)
-            updatePriorityIcon(priorityItems[position].iconResId)
+        // 优先级 5 芯片单选（替代下拉），默认选中"普通"(3)
+        priorityGroup.check(R.id.publish_dialog_priority_3)
+        priorityGroup.setOnCheckedStateChangeListener { _, checkedIds ->
+            selectedPriority = when (checkedIds.firstOrNull()) {
+                R.id.publish_dialog_priority_5 -> 5
+                R.id.publish_dialog_priority_4 -> 4
+                R.id.publish_dialog_priority_2 -> 2
+                R.id.publish_dialog_priority_1 -> 1
+                else -> 3
+            }
         }
 
         // Setup chips
@@ -307,14 +307,10 @@ class PublishFragment : DialogFragment() {
             priorityLayout.visibility = if (isChecked) View.VISIBLE else View.GONE
             if (isChecked) {
                 hideKeyboard() // FIXME: This does not seem to hide the keyboard
-                priorityDropdown.requestFocus()
-                priorityDropdown.showDropDown()
             } else {
-                // Reset to default priority
+                // 隐藏时重置为"普通"(3)
                 selectedPriority = 3
-                val priorityItems = PriorityAdapter.createPriorityItems(requireContext())
-                priorityDropdown.setText(priorityItems[2].label, false)
-                updatePriorityIcon(priorityItems[2].iconResId)
+                priorityGroup.check(R.id.publish_dialog_priority_3)
             }
         }
 
@@ -430,13 +426,6 @@ class PublishFragment : DialogFragment() {
     private fun hideKeyboard() {
         val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         imm?.hideSoftInputFromWindow(view?.windowToken, 0)
-    }
-
-    private fun updatePriorityIcon(iconResId: Int) {
-        val drawable = ContextCompat.getDrawable(requireContext(), iconResId)
-        drawable?.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
-        priorityDropdown.setCompoundDrawablesRelative(drawable, null, null, null)
-        priorityDropdown.compoundDrawablePadding = (12 * resources.displayMetrics.density).toInt()
     }
 
     private fun openFilePicker() {
@@ -624,8 +613,8 @@ class PublishFragment : DialogFragment() {
         titleText.isEnabled = enable
         messageText.isEnabled = enable
         tagsText.isEnabled = enable
-        priorityDropdown.isEnabled = enable
-        
+        for (i in 0 until priorityGroup.childCount) priorityGroup.getChildAt(i).isEnabled = enable
+
         // Chips
         chipMarkdown.isEnabled = enable
         chipTitle.isEnabled = enable

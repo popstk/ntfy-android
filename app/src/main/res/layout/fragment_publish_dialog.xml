@@ -143,23 +143,111 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Priority (toggleable) -->
-                <com.google.android.material.textfield.TextInputLayout
+                <!-- Priority (toggleable) — 5 个内联单选优先级芯片，匹配设计稿 .prio-row -->
+                <LinearLayout
                     android:id="@+id/publish_dialog_priority_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:visibility="gone"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/publish_dialog_priority_hint">
+                    android:layout_marginTop="12dp">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/publish_dialog_priority_dropdown"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/publish_dialog_priority_hint"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"/>
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/publish_dialog_priority_group"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"/>
+                        app:singleSelection="true"
+                        app:selectionRequired="true"
+                        app:chipSpacingHorizontal="6dp"
+                        app:singleLine="false">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/publish_dialog_priority_5"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/common_priority_max_name"
+                            android:textColor="@color/chip_text_state"
+                            app:chipBackgroundColor="@color/chip_background_state"
+                            app:chipStrokeWidth="0dp"
+                            app:chipIcon="@drawable/ic_circle"
+                            app:chipIconTint="@color/priority_max"
+                            app:chipIconVisible="true"
+                            app:chipIconSize="11dp"
+                            app:checkedIconVisible="false"/>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/publish_dialog_priority_4"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/common_priority_high_name"
+                            android:textColor="@color/chip_text_state"
+                            app:chipBackgroundColor="@color/chip_background_state"
+                            app:chipStrokeWidth="0dp"
+                            app:chipIcon="@drawable/ic_circle"
+                            app:chipIconTint="@color/priority_high"
+                            app:chipIconVisible="true"
+                            app:chipIconSize="11dp"
+                            app:checkedIconVisible="false"/>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/publish_dialog_priority_3"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/common_priority_default_name"
+                            android:textColor="@color/chip_text_state"
+                            app:chipBackgroundColor="@color/chip_background_state"
+                            app:chipStrokeWidth="0dp"
+                            app:chipIcon="@drawable/ic_circle"
+                            app:chipIconTint="@color/priority_default"
+                            app:chipIconVisible="true"
+                            app:chipIconSize="11dp"
+                            app:checkedIconVisible="false"/>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/publish_dialog_priority_2"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/common_priority_low_name"
+                            android:textColor="@color/chip_text_state"
+                            app:chipBackgroundColor="@color/chip_background_state"
+                            app:chipStrokeWidth="0dp"
+                            app:chipIcon="@drawable/ic_circle"
+                            app:chipIconTint="@color/priority_low"
+                            app:chipIconVisible="true"
+                            app:chipIconSize="11dp"
+                            app:checkedIconVisible="false"/>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/publish_dialog_priority_1"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/common_priority_min_name"
+                            android:textColor="@color/chip_text_state"
+                            app:chipBackgroundColor="@color/chip_background_state"
+                            app:chipStrokeWidth="0dp"
+                            app:chipIcon="@drawable/ic_circle"
+                            app:chipIconTint="@color/priority_min"
+                            app:chipIconVisible="true"
+                            app:chipIconSize="11dp"
+                            app:checkedIconVisible="false"/>
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                </LinearLayout>
 
                 <!-- Click URL field -->
                 <com.google.android.material.textfield.TextInputLayout
