@@ -30,17 +30,22 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/detail_menu_settings"
+        android:icon="@drawable/ic_menu_settings_24"
         android:title="@string/detail_menu_settings" />
     <item
         android:id="@+id/detail_menu_copy_url"
+        android:icon="@drawable/ic_menu_copy_24"
         android:title="@string/detail_menu_copy_url" />
     <item
         android:id="@+id/detail_menu_clear"
+        android:icon="@drawable/ic_menu_clear_24"
         android:title="@string/detail_menu_clear" />
     <item
         android:id="@+id/detail_menu_test"
+        android:icon="@drawable/ic_menu_test_24"
         android:title="@string/detail_menu_test" />
     <item
         android:id="@+id/detail_menu_unsubscribe"
+        android:icon="@drawable/ic_menu_unsubscribe_24"
         android:title="@string/detail_menu_unsubscribe" />
 </menu>

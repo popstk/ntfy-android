@@ -550,10 +550,16 @@ class DetailActivity : AppCompatActivity(), NotificationFragment.NotificationSet
         }
     }
 
+    @android.annotation.SuppressLint("RestrictedApi")
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_detail_action_bar, menu)
         this.menu = menu
-        
+
+        // Show icons in the overflow popup menu (hidden by default) to match the design
+        if (menu is androidx.appcompat.view.menu.MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
+
         setupSearchView()
         showHideMenuItems()
 
@@ -614,13 +620,26 @@ class DetailActivity : AppCompatActivity(), NotificationFragment.NotificationSet
         if (!this::menu.isInitialized) return
 
         runOnUiThread {
-            // Tint menu icons based on theme
+            // Tint toolbar (action) icons white; leave overflow popup items with their own
+            // vector tint (gray glyphs / red unsubscribe) so they stay visible on the white popup
             for (i in 0 until menu.size) {
-                menu[i].icon?.setTint(toolbarTextColor)
+                val item = menu[i]
+                if (item.itemId in OVERFLOW_ITEM_IDS) continue
+                item.icon?.setTint(toolbarTextColor)
             }
-            
+
             // Ensure collapse icon is tinted (back arrow when search is expanded)
             toolbar.collapseIcon?.setTint(toolbarTextColor)
+
+            // Make the destructive "unsubscribe" item red (icon + title), matching the design
+            menu.findItem(R.id.detail_menu_unsubscribe)?.let { item ->
+                val red = ContextCompat.getColor(this@DetailActivity, R.color.md_theme_error)
+                item.icon?.mutate()?.setTint(red)
+                val title = getString(R.string.detail_menu_unsubscribe)
+                val span = android.text.SpannableString(title)
+                span.setSpan(android.text.style.ForegroundColorSpan(red), 0, title.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                item.title = span
+            }
         }
         
         // Show/hide menu items based on state
@@ -1011,5 +1030,14 @@ class DetailActivity : AppCompatActivity(), NotificationFragment.NotificationSet
         const val EXTRA_SUBSCRIPTION_BASE_URL = "baseUrl"
         const val EXTRA_SUBSCRIPTION_TOPIC = "topic"
         const val EXTRA_SUBSCRIPTION_DISPLAY_NAME = "displayName"
+
+        // Overflow popup items: keep their own (gray/red) icon tint instead of the white toolbar tint
+        private val OVERFLOW_ITEM_IDS = setOf(
+            R.id.detail_menu_settings,
+            R.id.detail_menu_copy_url,
+            R.id.detail_menu_clear,
+            R.id.detail_menu_test,
+            R.id.detail_menu_unsubscribe
+        )
     }
 }
