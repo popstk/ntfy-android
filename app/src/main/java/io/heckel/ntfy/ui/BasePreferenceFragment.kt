@@ -28,7 +28,12 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
             recyclerView.setBackgroundColor(Color.TRANSPARENT)
             recyclerView.clipToPadding = false
             val density = resources.displayMetrics.density
-            val dividerColor = Color.argb(15, 0, 0, 0)
+            // Translucent white divider in dark mode (black is invisible on dark cards), matches design --sep
+            val dividerColor = if (io.heckel.ntfy.util.isDarkThemeOn(requireContext())) {
+                Color.argb(18, 255, 255, 255)
+            } else {
+                Color.argb(15, 0, 0, 0)
+            }
             recyclerView.addItemDecoration(
                 PreferenceGroupCardDecoration(
                     horizontalMargin = (12 * density).toInt(),
