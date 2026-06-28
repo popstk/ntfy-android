@@ -126,6 +126,16 @@ class DetailSettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.detail_preferences, rootKey)
 
+            // Apply custom category header layout to all PreferenceCategory items (match global settings indentation)
+            preferenceScreen?.let { screen ->
+                for (i in 0 until screen.preferenceCount) {
+                    val pref = screen.getPreference(i)
+                    if (pref is androidx.preference.PreferenceCategory) {
+                        pref.setLayoutResource(R.layout.preference_category_header)
+                    }
+                }
+            }
+
             // Dependencies (Fragments need a default constructor)
             repository = Repository.getInstance(requireActivity())
             serviceManager = SubscriberServiceManager(requireActivity())
