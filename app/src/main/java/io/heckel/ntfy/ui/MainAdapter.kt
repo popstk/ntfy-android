@@ -162,10 +162,13 @@ class MainAdapter(
             }
             itemView.setOnClickListener { onClick(subscription) }
             itemView.setOnLongClickListener { onLongClick(subscription); true }
+            // Keep the MaterialCardView surface visible (setBackgroundColor would wipe the card
+            // fill/corners/elevation, making cards invisible — especially in dark mode).
+            val card = itemView as? com.google.android.material.card.MaterialCardView
             if (selected.contains(subscription.id)) {
-                itemView.setBackgroundColor(Colors.itemSelectedBackground(context))
+                card?.setCardBackgroundColor(Colors.cardSelectedBackgroundColor(context))
             } else {
-                itemView.setBackgroundColor(Color.TRANSPARENT)
+                card?.setCardBackgroundColor(Colors.cardBackgroundColor(context))
             }
         }
     }
