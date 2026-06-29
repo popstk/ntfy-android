@@ -5,6 +5,8 @@ import android.app.Activity
 import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
@@ -19,6 +21,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.graphics.ColorUtils
 import androidx.core.view.allViews
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -94,7 +97,7 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
         private val layout: View = itemView.findViewById(R.id.detail_item_layout)
         private val cardView: CardView = itemView.findViewById(R.id.detail_item_card)
         private val priorityImageView: ImageView = itemView.findViewById(R.id.detail_item_priority_image)
-        private val priorityBarView: View = itemView.findViewById(R.id.detail_item_priority_bar)
+        private val priorityWashView: View = itemView.findViewById(R.id.detail_item_priority_wash)
         private val dateView: TextView = itemView.findViewById(R.id.detail_item_date_text)
         private val titleView: TextView = itemView.findViewById(R.id.detail_item_title_text)
         private val messageView: TextView = itemView.findViewById(R.id.detail_item_message_text)
@@ -179,14 +182,19 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
         }
 
         private fun renderPriority(context: Context, notification: Notification) {
-            val barColor = when (notification.priority) {
+            val baseColor = when (notification.priority) {
                 PRIORITY_MIN  -> ContextCompat.getColor(context, R.color.priority_min)
                 PRIORITY_LOW  -> ContextCompat.getColor(context, R.color.priority_low)
                 PRIORITY_HIGH -> ContextCompat.getColor(context, R.color.priority_high)
                 PRIORITY_MAX  -> ContextCompat.getColor(context, R.color.priority_max)
                 else          -> ContextCompat.getColor(context, R.color.priority_default)
             }
-            priorityBarView.backgroundTintList = android.content.res.ColorStateList.valueOf(barColor)
+            // 左缘淡优先级色向右渐隐（匹配设计稿 .notif-card::before）
+            val soft = ColorUtils.setAlphaComponent(baseColor, 33) // ~13% alpha
+            priorityWashView.background = GradientDrawable(
+                GradientDrawable.Orientation.LEFT_RIGHT,
+                intArrayOf(soft, Color.TRANSPARENT)
+            )
             // 箭头图标在新设计中冗余（颜色已表达优先级），统一隐藏
             priorityImageView.visibility = View.GONE
         }

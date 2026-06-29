@@ -2,6 +2,7 @@ package io.heckel.ntfy.ui
 
 import android.app.AlertDialog
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
 import android.net.Uri
@@ -20,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -966,23 +968,26 @@ class DetailActivity : AppCompatActivity(), NotificationFragment.NotificationSet
     }
 
     /**
-     * Show the full notification in a ColorOS-style dialog: priority bar + title + time/source +
+     * Show the full notification in a ColorOS-style dialog: priority-tinted header + title + time/source +
      * the complete (Markdown-rendered) message, with Copy / Open-link / Close actions.
      */
     private fun showNotificationDialog(notification: Notification) {
         val message = decodeMessage(notification)
         val view = layoutInflater.inflate(R.layout.dialog_notification_detail, null)
 
-        // Priority bar color (by message priority)
-        val barColorRes = when (notification.priority) {
+        // 标题区淡优先级色向下渐隐（匹配设计稿 .msg-dlg-head）
+        val priorityColorRes = when (notification.priority) {
             1 -> R.color.priority_min
             2 -> R.color.priority_low
             4 -> R.color.priority_high
             5 -> R.color.priority_max
             else -> R.color.priority_default
         }
-        view.findViewById<View>(R.id.dialog_detail_priority_bar).backgroundTintList =
-            android.content.res.ColorStateList.valueOf(ContextCompat.getColor(this, barColorRes))
+        val soft = ColorUtils.setAlphaComponent(ContextCompat.getColor(this, priorityColorRes), 33) // ~13% alpha
+        view.findViewById<View>(R.id.dialog_detail_head).background = GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM,
+            intArrayOf(soft, Color.TRANSPARENT)
+        )
 
         // Title + time + source topic
         view.findViewById<TextView>(R.id.dialog_detail_title).text =
