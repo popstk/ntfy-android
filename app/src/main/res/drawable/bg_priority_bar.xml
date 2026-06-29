@@ -3,4 +3,6 @@
     android:shape="rectangle">
     <!-- 实心白底，便于代码用 backgroundTint 按优先级着色（透明底会被 SRC_IN tint 吃成透明） -->
     <solid android:color="#FFFFFF"/>
+    <!-- 圆角小圆条，匹配设计稿 .nc-pbar(border-radius:2px) -->
+    <corners android:radius="2dp"/>
 </shape>

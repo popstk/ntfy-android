@@ -95,7 +95,6 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
         private val cardView: CardView = itemView.findViewById(R.id.detail_item_card)
         private val priorityImageView: ImageView = itemView.findViewById(R.id.detail_item_priority_image)
         private val priorityBarView: View = itemView.findViewById(R.id.detail_item_priority_bar)
-        private val priorityPipView: View = itemView.findViewById(R.id.detail_item_priority_pip)
         private val dateView: TextView = itemView.findViewById(R.id.detail_item_date_text)
         private val titleView: TextView = itemView.findViewById(R.id.detail_item_title_text)
         private val messageView: TextView = itemView.findViewById(R.id.detail_item_message_text)
@@ -118,7 +117,9 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
             val message = maybeAppendActionErrors(formatMessage(notification), notification)
 
             dateView.text = formatDateShort(notification.timestamp)
-            if (notification.isMarkdown()) {
+            // Render Markdown when the message is flagged as markdown, OR when the global
+            // "always render Markdown" setting is on (default), so **bold**/links/lists render.
+            if (notification.isMarkdown() || repository.getMarkdownEnabled()) {
                 messageView.autoLinkMask = 0
                 markwon.setMarkdown(messageView, message.toString())
             } else {
@@ -186,8 +187,6 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
                 else          -> ContextCompat.getColor(context, R.color.priority_default)
             }
             priorityBarView.backgroundTintList = android.content.res.ColorStateList.valueOf(barColor)
-            // 优先级圆点与顶部横条同色（匹配设计稿 .prio-pip）
-            priorityPipView.backgroundTintList = android.content.res.ColorStateList.valueOf(barColor)
             // 箭头图标在新设计中冗余（颜色已表达优先级），统一隐藏
             priorityImageView.visibility = View.GONE
         }
