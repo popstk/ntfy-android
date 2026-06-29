@@ -181,4 +181,10 @@
     <!-- Tag chip color -->
     <color name="tag_text_color">#5B8EF0</color>
     <color name="tag_pill_background">#1A5B8EF0</color>
+
+    <!-- 通知类型药丸：详情列表标题里的 [完成]/[需处理]/[中断]（通知样式方案 B 的 App 增强版） -->
+    <color name="state_done">#2E9E68</color>
+    <color name="state_attn">#B26A00</color>
+    <color name="state_fail">#C0392B</color>
+    <color name="state_neutral">#5E6B7A</color>
 </resources>

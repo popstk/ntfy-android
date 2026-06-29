@@ -10,6 +10,8 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.Spannable
+import android.text.SpannableStringBuilder
 import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
@@ -146,7 +148,7 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
             cardView.setOnLongClickListener { onLongClick(notification); true }
             if (notification.title != "") {
                 titleView.visibility = View.VISIBLE
-                titleView.text = formatTitle(notification)
+                bindTitleWithTypePill(titleView, formatTitle(notification))
             } else {
                 titleView.visibility = View.GONE
             }
@@ -200,6 +202,36 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
         }
 
         // 生成单个标签胶囊（浅蓝底 + 蓝粗字），匹配设计稿 .tag
+        /**
+         * 标题以 `[xxx]` 开头时（通知样式方案 B：[完成]/[需处理]/[中断] 项目名），
+         * 把开头的 `[xxx]` 渲染成按类型上色的圆角药丸，其余文字照常。
+         * 仅影响 App 详情列表，通知栏不经过这里、仍是纯文字。
+         */
+        private fun bindTitleWithTypePill(view: TextView, rawTitle: String) {
+            val m = TITLE_TYPE_REGEX.find(rawTitle)
+            if (m == null) {
+                view.text = rawTitle
+                return
+            }
+            val label = m.groupValues[1]
+            val rest = m.groupValues[2]
+            val context = view.context
+            val colorRes = when (label) {
+                "完成" -> R.color.state_done
+                "需处理" -> R.color.state_attn
+                "中断" -> R.color.state_fail
+                else -> R.color.state_neutral
+            }
+            val textColor = ContextCompat.getColor(context, colorRes)
+            val bgColor = ColorUtils.setAlphaComponent(textColor, 0x2E) // ~18% 半透明同色底
+            val d = context.resources.displayMetrics.density
+            val span = RoundedBackgroundSpan(textColor, bgColor, 7 * d, 7 * d, 6 * d)
+            val sb = SpannableStringBuilder(label)
+            sb.setSpan(span, 0, label.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            if (rest.isNotEmpty()) sb.append(rest)
+            view.text = sb
+        }
+
         private fun makeTagPill(context: Context, text: String): TextView {
             val tv = TextView(context)
             tv.text = text
@@ -589,5 +621,8 @@ class DetailAdapter(private val activity: Activity, private val lifecycleScope: 
         const val TAG = "NtfyDetailAdapter"
         const val REQUEST_CODE_WRITE_STORAGE_PERMISSION_FOR_DOWNLOAD = 9876
         const val IMAGE_PREVIEW_MAX_BYTES = 5 * 1024 * 1024 // Too large images crash the app with "Canvas: trying to draw too large(233280000bytes) bitmap."
+
+        // 标题开头的 [类型] 前缀（通知样式方案 B）：[完成]/[需处理]/[中断] 等，渲染成彩色药丸
+        private val TITLE_TYPE_REGEX = Regex("^\\[([^\\[\\]]{1,8})]\\s*(.*)$")
     }
 }
