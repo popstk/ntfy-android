@@ -70,6 +70,14 @@ class ShareActivity : AppCompatActivity() {
             toolbarLayout.setBackgroundColor(statusBarColor)
         }
         
+        // Pad toolbar content below the status bar so the gradient fills behind it (no seam)
+        val toolbarContent = toolbarLayout.findViewById<View>(R.id.toolbar_content)
+        androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(toolbarLayout) { _, insets ->
+            val top = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.statusBars()).top
+            toolbarContent.setPadding(toolbarContent.paddingLeft, top, toolbarContent.paddingRight, toolbarContent.paddingBottom)
+            insets
+        }
+
         val toolbar = toolbarLayout.findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
         toolbar.setTitleTextColor(toolbarTextColor)
         toolbar.setNavigationIconTint(toolbarTextColor)
@@ -80,6 +88,10 @@ class ShareActivity : AppCompatActivity() {
         // Set system status bar appearance
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars =
             Colors.shouldUseLightStatusBar(dynamicColors, darkMode)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            window.isStatusBarContrastEnforced = false
+            window.isNavigationBarContrastEnforced = false
+        }
 
         // Show 'Back' button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

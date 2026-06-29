@@ -186,6 +186,13 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
         // Gradient appbar = dark icons not needed
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
+        // Don't let the system draw a contrast scrim over the transparent status bar
+        // (in light mode it shows as a pale band, breaking the gradient seam).
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            window.isStatusBarContrastEnforced = false
+            window.isNavigationBarContrastEnforced = false
+        }
+
         // Let the gradient draw behind the status bar (no seam): pad only the toolbar content
         // down by the status bar height, so the time/notification row sits on the gradient.
         val toolbarContent = toolbarLayout.findViewById<View>(R.id.toolbar_content)

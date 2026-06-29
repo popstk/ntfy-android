@@ -136,7 +136,10 @@ class DetailActivity : AppCompatActivity(), NotificationFragment.NotificationSet
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
+        // White status bar icons; gradient appbar draws behind the status bar
+        enableEdgeToEdge(
+            statusBarStyle = androidx.activity.SystemBarStyle.dark(Color.TRANSPARENT)
+        )
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
@@ -160,6 +163,17 @@ class DetailActivity : AppCompatActivity(), NotificationFragment.NotificationSet
         setSupportActionBar(toolbar)
 
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            window.isStatusBarContrastEnforced = false
+            window.isNavigationBarContrastEnforced = false
+        }
+
+        // Pad toolbar content below the status bar so the gradient fills behind it (no seam)
+        val toolbarContent = toolbarLayout.findViewById<View>(R.id.toolbar_content)
+        ViewCompat.setOnApplyWindowInsetsListener(toolbarLayout) { _, insets ->
+            toolbarContent.updatePadding(top = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top)
+            insets
+        }
 
         val detailContentLayout = findViewById<View>(R.id.detail_content_layout)
         detailContentLayout.setBackgroundColor(

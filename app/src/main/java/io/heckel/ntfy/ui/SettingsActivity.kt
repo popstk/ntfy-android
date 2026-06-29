@@ -60,7 +60,10 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPrefere
     private lateinit var serviceManager: SubscriberServiceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
+        // White status bar icons; gradient appbar draws behind the status bar
+        enableEdgeToEdge(
+            statusBarStyle = androidx.activity.SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        )
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
@@ -81,6 +84,20 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPrefere
         if (toolbar != null) setSupportActionBar(toolbar)
 
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            window.isStatusBarContrastEnforced = false
+            window.isNavigationBarContrastEnforced = false
+        }
+
+        // Pad toolbar content below the status bar so the gradient fills behind it (no seam)
+        val toolbarContent = toolbarLayout?.findViewById<View>(R.id.toolbar_content)
+        if (toolbarLayout != null && toolbarContent != null) {
+            androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(toolbarLayout) { _, insets ->
+                val top = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.statusBars()).top
+                toolbarContent.setPadding(toolbarContent.paddingLeft, top, toolbarContent.paddingRight, toolbarContent.paddingBottom)
+                insets
+            }
+        }
 
         // Populate settings header
         try {
