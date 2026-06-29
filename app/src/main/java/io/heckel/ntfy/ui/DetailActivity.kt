@@ -953,21 +953,55 @@ class DetailActivity : AppCompatActivity(), NotificationFragment.NotificationSet
         if (actionMode != null) {
             handleActionModeClick(notification)
         } else {
+            // Clear this notification's unread dot immediately (previously cleared only on leaving
+            // the topic in onPause), then show the full message.
+            if (notification.notificationId != 0) {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    notifier?.cancel(notification)
+                    repository.updateNotification(notification.copy(notificationId = 0))
+                }
+            }
             showNotificationDialog(notification)
         }
     }
 
     /**
-     * Show the full notification (title + complete message) in a scrollable, selectable dialog.
-     * The in-list text can get very long (especially on self-hosted servers), so tapping opens
-     * a dialog where the whole message is readable, with Copy and (if present) Open-link actions.
+     * Show the full notification in a ColorOS-style dialog: priority bar + title + time/source +
+     * the complete (Markdown-rendered) message, with Copy / Open-link / Close actions.
      */
     private fun showNotificationDialog(notification: Notification) {
         val message = decodeMessage(notification)
-        val dialogTitle = if (notification.title.isNotEmpty()) notification.title else getString(R.string.detail_item_dialog_title)
+        val view = layoutInflater.inflate(R.layout.dialog_notification_detail, null)
+
+        // Priority bar color (by message priority)
+        val barColorRes = when (notification.priority) {
+            1 -> R.color.priority_min
+            2 -> R.color.priority_low
+            4 -> R.color.priority_high
+            5 -> R.color.priority_max
+            else -> R.color.priority_default
+        }
+        view.findViewById<View>(R.id.dialog_detail_priority_bar).backgroundTintList =
+            android.content.res.ColorStateList.valueOf(ContextCompat.getColor(this, barColorRes))
+
+        // Title + time + source topic
+        view.findViewById<TextView>(R.id.dialog_detail_title).text =
+            if (notification.title.isNotEmpty()) notification.title else getString(R.string.detail_item_dialog_title)
+        view.findViewById<TextView>(R.id.dialog_detail_time).text = formatDateShort(notification.timestamp)
+        view.findViewById<TextView>(R.id.dialog_detail_source).text = subscriptionDisplayName
+
+        // Body: render Markdown when flagged or the global setting is on; keep links tappable
+        val bodyView = view.findViewById<TextView>(R.id.dialog_detail_body)
+        if (notification.isMarkdown() || repository.getMarkdownEnabled()) {
+            io.heckel.ntfy.util.MarkwonFactory.createForMessage(this).setMarkdown(bodyView, message)
+        } else {
+            bodyView.text = message
+            bodyView.autoLinkMask = android.text.util.Linkify.WEB_URLS
+        }
+        bodyView.movementMethod = android.text.method.LinkMovementMethod.getInstance()
+
         val builder = MaterialAlertDialogBuilder(this)
-            .setTitle(dialogTitle)
-            .setMessage(message)
+            .setView(view)
             .setPositiveButton(R.string.common_button_copy) { _, _ ->
                 copyToClipboard(this, "notification", message)
             }
@@ -982,14 +1016,7 @@ class DetailActivity : AppCompatActivity(), NotificationFragment.NotificationSet
                 }
             }
         }
-        val dialog = builder.show()
-        val messageView = dialog.findViewById<TextView>(android.R.id.message)
-        // Make the full message selectable so users can copy any part of it
-        messageView?.setTextIsSelectable(true)
-        // Render Markdown (consistent with the list) when flagged or the global setting is on
-        if (messageView != null && (notification.isMarkdown() || repository.getMarkdownEnabled())) {
-            io.heckel.ntfy.util.MarkwonFactory.createForMessage(this).setMarkdown(messageView, message)
-        }
+        builder.show()
     }
 
     private fun onNotificationLongClick(notification: Notification) {

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 消息来源话题小胶囊背景：半透明灰，亮暗通用，匹配设计稿 .src -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#24888FA4" />
+    <corners android:radius="7dp" />
+</shape>

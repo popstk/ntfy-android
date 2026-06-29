@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 消息详情弹窗内容（点击通知看全文），匹配设计稿 .msg-dlg -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="6dp">
+
+        <!-- 顶部优先级色条（内缩圆角，按优先级着色） -->
+        <View
+            android:id="@+id/dialog_detail_priority_bar"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginEnd="56dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/bg_priority_bar" />
+
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/dialog_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:lineSpacingMultiplier="1.25" />
+
+        <!-- 时间 + 来源话题 chip -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="7dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
+
+            <TextView
+                android:id="@+id/dialog_detail_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/dialog_detail_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_source_chip"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- 正文（渲染 Markdown，链接可点） -->
+        <TextView
+            android:id="@+id/dialog_detail_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="14dp"
+            android:textColor="@color/message_body"
+            android:textSize="15sp"
+            android:lineSpacingMultiplier="1.35" />
+    </LinearLayout>
+</ScrollView>
