@@ -971,6 +971,7 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPrefere
 
                 val preferenceCategory = PreferenceCategory(preferenceScreen.context)
                 preferenceCategory.title = shortUrl(baseUrl)
+                preferenceCategory.layoutResource = R.layout.preference_category_header
                 preferenceScreen.addPreference(preferenceCategory)
 
                 users.forEach { user ->
@@ -1015,13 +1016,23 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPrefere
         }
     }
 
-    class CustomHeaderSettingsFragment : PreferenceFragmentCompat() {
+    class CustomHeaderSettingsFragment : BasePreferenceFragment() {
         private lateinit var repository: Repository
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.custom_header_preferences, rootKey)
+            applyCategoryHeaderLayout()
             repository = Repository.getInstance(requireActivity())
             reload()
+        }
+
+        private fun applyCategoryHeaderLayout() {
+            preferenceScreen?.let { screen ->
+                for (i in 0 until screen.preferenceCount) {
+                    (screen.getPreference(i) as? PreferenceCategory)
+                        ?.setLayoutResource(R.layout.preference_category_header)
+                }
+            }
         }
 
         fun reload() {
@@ -1041,6 +1052,7 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPrefere
 
                 val preferenceCategory = PreferenceCategory(preferenceScreen.context)
                 preferenceCategory.title = shortUrl(baseUrl)
+                preferenceCategory.layoutResource = R.layout.preference_category_header
                 preferenceScreen.addPreference(preferenceCategory)
 
                 headers.forEach { header ->
