@@ -57,3 +57,7 @@ proguard-project.txt
 # Android Studio/IDEA
 *.iml
 .idea
+
+# Material 3 release signing (do not commit secrets)
+app/release.keystore
+app/keystore.properties
