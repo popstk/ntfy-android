@@ -142,7 +142,11 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
+        // Force white status bar icons (gradient appbar draws behind the status bar);
+        // SystemBarStyle.dark = light/white foreground regardless of light/dark theme.
+        enableEdgeToEdge(
+            statusBarStyle = androidx.activity.SystemBarStyle.dark(Color.TRANSPARENT)
+        )
         super.onCreate(savedInstanceState)
 
         if (!OnboardingActivity.isOnboardingDone(this)) {
@@ -181,6 +185,15 @@ class MainActivity : AppCompatActivity(), AddFragment.SubscribeListener, Notific
 
         // Gradient appbar = dark icons not needed
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
+
+        // Let the gradient draw behind the status bar (no seam): pad only the toolbar content
+        // down by the status bar height, so the time/notification row sits on the gradient.
+        val toolbarContent = toolbarLayout.findViewById<View>(R.id.toolbar_content)
+        ViewCompat.setOnApplyWindowInsetsListener(toolbarLayout) { _, insets ->
+            val top = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
+            toolbarContent.updatePadding(top = top)
+            insets
+        }
 
         // Floating action button ("+")
         fab = findViewById(R.id.fab)

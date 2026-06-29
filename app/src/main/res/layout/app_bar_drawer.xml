@@ -12,18 +12,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
-    android:fitsSystemWindows="true"
     android:background="@android:color/transparent"
     android:elevation="0dp"
     app:elevation="0dp"
+    app:statusBarForeground="@null"
     app:liftOnScroll="false">
 
+    <!--
+      不再用 fitsSystemWindows 把内容整体下推（那样渐变到不了状态栏，露出窗口背景出现接缝）。
+      改为：渐变 View 铺满整个 FrameLayout（含状态栏区域），仅给工具栏内容
+      (toolbar_content) 顶部加状态栏高度的 padding，由各 Activity 的 insets 监听器设置。
+    -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content">
 
-        <!-- 渐变背景层（普通 View，drawable 一定渲染） -->
+        <!-- 渐变背景层（普通 View，drawable 一定渲染），铺满含状态栏 -->
         <View
             android:id="@+id/toolbar_gradient"
             android:layout_width="match_parent"
@@ -31,6 +35,7 @@
             android:background="@drawable/gradient_appbar" />
 
         <LinearLayout
+            android:id="@+id/toolbar_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
