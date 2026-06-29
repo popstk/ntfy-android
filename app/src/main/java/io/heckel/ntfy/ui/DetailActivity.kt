@@ -951,22 +951,39 @@ class DetailActivity : AppCompatActivity(), NotificationFragment.NotificationSet
     private fun onNotificationClick(notification: Notification) {
         if (actionMode != null) {
             handleActionModeClick(notification)
-        } else if (notification.click != "") {
-            try {
-                startActivity(Intent(ACTION_VIEW, notification.click.toUri()))
-            } catch (e: Exception) {
-                Log.w(TAG, "Cannot open click URL", e)
-                runOnUiThread {
-                    Toast
-                        .makeText(this@DetailActivity, getString(R.string.detail_item_cannot_open_url, e.message), Toast.LENGTH_LONG)
-                        .show()
+        } else {
+            showNotificationDialog(notification)
+        }
+    }
+
+    /**
+     * Show the full notification (title + complete message) in a scrollable, selectable dialog.
+     * The in-list text can get very long (especially on self-hosted servers), so tapping opens
+     * a dialog where the whole message is readable, with Copy and (if present) Open-link actions.
+     */
+    private fun showNotificationDialog(notification: Notification) {
+        val message = decodeMessage(notification)
+        val dialogTitle = if (notification.title.isNotEmpty()) notification.title else getString(R.string.detail_item_dialog_title)
+        val builder = MaterialAlertDialogBuilder(this)
+            .setTitle(dialogTitle)
+            .setMessage(message)
+            .setPositiveButton(R.string.common_button_copy) { _, _ ->
+                copyToClipboard(this, "notification", message)
+            }
+            .setNegativeButton(R.string.detail_item_dialog_close, null)
+        if (notification.click != "") {
+            builder.setNeutralButton(R.string.detail_item_dialog_open_link) { _, _ ->
+                try {
+                    startActivity(Intent(ACTION_VIEW, notification.click.toUri()))
+                } catch (e: Exception) {
+                    Log.w(TAG, "Cannot open click URL", e)
+                    Toast.makeText(this, getString(R.string.detail_item_cannot_open_url, e.message), Toast.LENGTH_LONG).show()
                 }
             }
-        } else {
-            runOnUiThread {
-                copyToClipboard(this, "notification", decodeMessage(notification))
-            }
         }
+        val dialog = builder.show()
+        // Make the full message selectable so users can copy any part of it
+        dialog.findViewById<TextView>(android.R.id.message)?.setTextIsSelectable(true)
     }
 
     private fun onNotificationLongClick(notification: Notification) {

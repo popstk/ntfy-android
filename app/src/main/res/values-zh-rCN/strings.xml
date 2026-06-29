@@ -82,6 +82,9 @@
     <string name="detail_item_menu_cancel">不再下载</string>
     <string name="detail_item_menu_copy_url">复制链接地址</string>
     <string name="detail_item_menu_copy_contents">复制通知</string>
+    <string name="detail_item_dialog_title">消息内容</string>
+    <string name="detail_item_dialog_open_link">打开链接</string>
+    <string name="detail_item_dialog_close">关闭</string>
     <string name="detail_item_saved_successfully">已保存为“下载”目录中的 %1$s</string>
     <string name="detail_item_cannot_download">无法打开或下载附件。此链接已过期且未保存到本地。</string>
     <string name="channel_subscriber_notification_noinstant_text_two">已订阅 2 个主题</string>

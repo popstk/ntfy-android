@@ -188,6 +188,9 @@
     <string name="detail_item_menu_save_file">Save file</string>
     <string name="detail_item_menu_copy_url">Copy URL</string>
     <string name="detail_item_menu_copy_contents">Copy notification</string>
+    <string name="detail_item_dialog_title">Message</string>
+    <string name="detail_item_dialog_open_link">Open link</string>
+    <string name="detail_item_dialog_close">Close</string>
     <string name="detail_item_saved_successfully">Saved as \"%1$s\" in the \"Downloads\" folder</string>
     <string name="detail_item_cannot_download">Cannot open or download attachment. The link expired and no local file could be found.</string>
     <string name="detail_item_cannot_open">Cannot open attachment: %1$s</string>
