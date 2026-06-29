@@ -21,6 +21,8 @@
     <color name="md_theme_onBackground">#1A1A2E</color>
     <color name="md_theme_surface">#FFFFFF</color>
     <color name="md_theme_onSurface">#1A1A2E</color>
+    <!-- 消息正文专用色：比标题略弱但清晰可读，匹配设计稿 body 变量 -->
+    <color name="message_body">#3D4254</color>
     <color name="md_theme_surfaceVariant">#EEF0F8</color>
     <color name="md_theme_onSurfaceVariant">#8890A4</color>
     <color name="md_theme_outline">#C4C9D9</color>
