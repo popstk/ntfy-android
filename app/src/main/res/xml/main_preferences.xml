@@ -79,6 +79,12 @@
                 app:title="@string/settings_general_message_bar_title"
                 app:icon="@drawable/ic_pref_palette_colored"
                 app:defaultValue="true"/>
+        <SwitchPreferenceCompat
+                app:key="@string/settings_general_markdown_key"
+                app:title="@string/settings_general_markdown_title"
+                app:summary="@string/settings_general_markdown_summary"
+                app:icon="@drawable/ic_pref_palette_colored"
+                app:defaultValue="true"/>
     </PreferenceCategory>
     <PreferenceCategory
             app:title="@string/settings_backup_restore_header"

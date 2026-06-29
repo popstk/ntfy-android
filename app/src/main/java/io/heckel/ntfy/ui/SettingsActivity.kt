@@ -534,6 +534,20 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPrefere
                 }
             }
 
+            // Render all messages as Markdown (ntfy normally only renders when the message is
+            // sent with Content-Type text/markdown; this makes **bold**, links, lists, etc. always render)
+            val markdownEnabledPrefId = context?.getString(R.string.settings_general_markdown_key) ?: return
+            val markdownEnabled: SwitchPreferenceCompat? = findPreference(markdownEnabledPrefId)
+            markdownEnabled?.isChecked = repository.getMarkdownEnabled()
+            markdownEnabled?.preferenceDataStore = object : PreferenceDataStore() {
+                override fun putBoolean(key: String?, value: Boolean) {
+                    repository.setMarkdownEnabled(value)
+                }
+                override fun getBoolean(key: String?, defValue: Boolean): Boolean {
+                    return repository.getMarkdownEnabled()
+                }
+            }
+
             // Default Base URL
             val appBaseUrl = getString(R.string.app_base_url)
             val defaultBaseUrlPrefId = context?.getString(R.string.settings_general_default_base_url_key) ?: return

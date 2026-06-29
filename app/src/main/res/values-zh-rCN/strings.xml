@@ -398,6 +398,8 @@
     <string name="settings_general_message_bar_title">显示消息栏</string>
     <string name="settings_general_message_bar_summary_enabled">显示在话题视图底部的消息栏</string>
     <string name="settings_general_message_bar_summary_disabled">显示在话题视图底部的发布按钮</string>
+    <string name="settings_general_markdown_title">渲染 Markdown</string>
+    <string name="settings_general_markdown_summary">始终将消息中的粗体、链接、列表等按 Markdown 显示</string>
     <string name="settings_advanced_custom_headers_title">自定义标头</string>
     <string name="settings_advanced_custom_headers_summary">定义将随每个请求一起发送的自定义 HTTP 标头，例如，如果 ntfy 服务器位于需要身份验证的代理或隧道后面。</string>
     <string name="settings_advanced_custom_headers_prefs_header_add">添加标头</string>
