@@ -35,6 +35,7 @@ import io.heckel.ntfy.BuildConfig
 import io.heckel.ntfy.R
 import io.heckel.ntfy.app.Application
 import io.heckel.ntfy.db.Notification
+import io.heckel.ntfy.db.isMarkdown
 import io.heckel.ntfy.db.Repository
 import io.heckel.ntfy.db.Subscription
 import io.heckel.ntfy.firebase.FirebaseMessenger
@@ -207,7 +208,7 @@ class DetailActivity : AppCompatActivity(), NotificationFragment.NotificationSet
         val baseUrl = extractBaseUrl(url, secure)
         val topic = url.pathSegments.first()
 
-        title = topicShortUrl(baseUrl, topic)
+        title = displayName ?: topic
 
         // Subscribe to topic if it doesn't already exist
         lifecycleScope.launch(Dispatchers.IO) {
@@ -982,8 +983,13 @@ class DetailActivity : AppCompatActivity(), NotificationFragment.NotificationSet
             }
         }
         val dialog = builder.show()
+        val messageView = dialog.findViewById<TextView>(android.R.id.message)
         // Make the full message selectable so users can copy any part of it
-        dialog.findViewById<TextView>(android.R.id.message)?.setTextIsSelectable(true)
+        messageView?.setTextIsSelectable(true)
+        // Render Markdown (consistent with the list) when flagged or the global setting is on
+        if (messageView != null && (notification.isMarkdown() || repository.getMarkdownEnabled())) {
+            io.heckel.ntfy.util.MarkwonFactory.createForMessage(this).setMarkdown(messageView, message)
+        }
     }
 
     private fun onNotificationLongClick(notification: Notification) {

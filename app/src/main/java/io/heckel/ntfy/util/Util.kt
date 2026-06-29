@@ -67,12 +67,13 @@ fun subscriptionTopicShortUrl(subscription: Subscription) : String {
 }
 
 fun displayName(appBaseUrl: String?, subscription: Subscription) : String {
+    // Prefer the user-set display name; otherwise show just the topic. The server/domain prefix
+    // (e.g. "ntfy.example.com/mytopic") is long and rarely meaningful — especially for self-hosted
+    // servers — so we drop it. The full topic URL is still shown in the subscription settings.
     if (subscription.displayName != null) {
         return subscription.displayName
-    } else if (appBaseUrl == subscription.baseUrl) {
-        return subscription.topic
     }
-    return subscriptionTopicShortUrl(subscription)
+    return subscription.topic
 }
 
 fun shortUrl(url: String) = url
